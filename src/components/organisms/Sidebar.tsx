@@ -22,8 +22,11 @@ function AppSidebar() {
         <MainAvatar
           imgSrc="/chatify-logos/chatify-missile.png"
           fallBackText="ch"
-          className="mx-auto my-1"
+          className="mx-auto my-1 ring-chart-2"
         />
+        <h1 className="text-center capitalize text-md md:text-xl font-bold">
+          ali boorboor
+        </h1>
         <Input type="text" placeholder="Search" />
       </SidebarHeader>
       <SidebarContent className="scrollbar-hidden">

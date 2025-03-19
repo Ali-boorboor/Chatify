@@ -5,9 +5,13 @@ import { memo } from "react";
 function MainAvatar({ imgSrc, fallBackText, className }: MainAvatarProps) {
   return (
     <Avatar
-      className={`w-10 md:w-13 h-10 md:h-13 ring-2 ring-foreground ${className}`}
+      className={`w-10 md:w-13 h-10 md:h-13 ring-2 ring-foreground drop-shadow-lg ${className}`}
     >
-      <AvatarImage className="object-cover" src={imgSrc} alt="avatar" />
+      <AvatarImage
+        className="object-cover object-center"
+        src={imgSrc}
+        alt="avatar"
+      />
       <AvatarFallback className="uppercase font-bold">
         {fallBackText}
       </AvatarFallback>

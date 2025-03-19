@@ -1,4 +1,4 @@
-import Layout from "@/components/organisms/Home/Layout";
+import Layout from "@/components/organisms/Layout";
 import ChatInput from "@/components/molecules/Home/ChatInput";
 import ChatBubble from "@/components/molecules/Home/ChatBubble";
 import { memo } from "react";
