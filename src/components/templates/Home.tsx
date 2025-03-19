@@ -1,0 +1,310 @@
+import Layout from "@/components/organisms/Home/Layout";
+import ChatInput from "@/components/molecules/Home/ChatInput";
+import ChatBubble from "@/components/molecules/Home/ChatBubble";
+import { memo } from "react";
+
+function Home() {
+  return (
+    <Layout>
+      <div className="flex flex-col h-full justify-between relative">
+        <div className="flex flex-col justify-start gap-4 py-4 px-6 md:px-20 xl:px-40">
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+          <ChatBubble
+            isThisUserMessage={false}
+            imgSrc=""
+            fallBackText="sb"
+            message="ok !"
+          />
+          <ChatBubble
+            isThisUserMessage={true}
+            imgSrc=""
+            fallBackText="ab"
+            message="fdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasddddddddddddddddddddddddddddddddddddddddddddfdasdddddddddddddddddddddddddddddddddddddddddddd"
+          />
+        </div>
+        <div className="sticky bottom-0 z-50 md:pb-4 md:px-20 xl:px-40 backdrop-blur-xs">
+          <div className="w-full bg-accent p-4 md:rounded-xl">
+            <ChatInput />
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+export default memo(Home);
