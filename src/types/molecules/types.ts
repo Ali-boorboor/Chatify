@@ -1,20 +1,21 @@
 export type ChatItemProps = {
   imgSrc?: string;
-  fallBackText: string;
   chatTitle: string;
+  fallBackText: string;
   lastChatText?: string;
   wrapperClassname?: string;
+  notifCounts?: string | number;
 };
 
 export type MainAvatarProps = {
   imgSrc?: string;
-  fallBackText: string;
   className?: string;
+  fallBackText: string;
 };
 
 export type ChatBubbleProps = {
-  isThisUserMessage: boolean;
   imgSrc?: string;
-  fallBackText: string;
   message: string;
+  fallBackText: string;
+  isThisUserMessage: boolean;
 };

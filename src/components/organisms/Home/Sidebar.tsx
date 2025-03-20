@@ -1,5 +1,5 @@
 import Divider from "@/components/atoms/Divider";
-import MainAvatar from "@/components/molecules/MainAvatar";
+import MainAvatar from "@/components/atoms/MainAvatar";
 import ChatItem from "@/components/molecules/Sidebar/ChatItem";
 import ChatItemSkeleton from "@/components/molecules/Sidebar/ChatItemSkeleton";
 import { Button } from "@/components/ui/button";
@@ -17,11 +17,11 @@ import { memo } from "react";
 
 function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar className="border-r border-foreground">
       <SidebarHeader>
         <MainAvatar
-          imgSrc="/chatify-logos/chatify-missile.png"
-          fallBackText="ch"
+          imgSrc=""
+          fallBackText="ab"
           className="mx-auto my-1 ring-chart-2"
         />
         <h1 className="text-center capitalize text-md md:text-xl font-bold">
@@ -53,6 +53,7 @@ function AppSidebar() {
             fallBackText="ab"
             chatTitle="ali boorboor"
             lastChatText="are you sure about that ?"
+            notifCounts={3}
           />
           <Divider />
           <ChatItem
@@ -60,6 +61,7 @@ function AppSidebar() {
             fallBackText="ab"
             chatTitle="ali boorboor"
             lastChatText="are you sure about that ?"
+            notifCounts="2"
           />
           <ChatItemSkeleton />
         </SidebarGroupContent>

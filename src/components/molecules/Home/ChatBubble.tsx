@@ -1,6 +1,8 @@
-import MainAvatar from "@/components/molecules/MainAvatar";
-import UserDataDrawer from "@/components/organisms/UserDataDrawer";
-import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
+import MainAvatar from "@/components/atoms/MainAvatar";
+import UserDataDrawer from "@/components/organisms/Home/UserDataDrawer";
+import UserDatasHoverCard from "@/components/atoms/UserDatasHoverCard";
+import { HoverCard, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { ChatBubbleProps } from "@/types/molecules/types";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
@@ -27,16 +29,26 @@ function ChatBubble({
       >
         <ContextMenu>
           {!isThisUserMessage && (
-            <Drawer>
-              <DrawerTrigger>
-                <MainAvatar
-                  imgSrc={imgSrc}
-                  fallBackText={fallBackText}
-                  className="w-8 md:w-10 md:h-10 h-8 cursor-pointer"
-                />
-              </DrawerTrigger>
-              <UserDataDrawer />
-            </Drawer>
+            <Sheet>
+              <HoverCard>
+                <SheetTrigger>
+                  <HoverCardTrigger>
+                    <MainAvatar
+                      imgSrc={imgSrc}
+                      fallBackText={fallBackText}
+                      className="w-8 md:w-10 md:h-10 h-8 cursor-pointer"
+                    />
+                  </HoverCardTrigger>
+                  <UserDatasHoverCard
+                    imgSrc=""
+                    fallBackText="sb"
+                    username="sarabayat"
+                    identifier="@sara-bayatam"
+                  />
+                </SheetTrigger>
+                <UserDataDrawer />
+              </HoverCard>
+            </Sheet>
           )}
           <ContextMenuTrigger>
             <p
@@ -59,16 +71,18 @@ function ChatBubble({
               className="w-8 md:w-10 md:h-10 h-8 ring-chart-2"
             />
           )}
-          <ContextMenuContent>
-            <ContextMenuItem>
-              <MdModeEdit />
-              <p>Edit</p>
-            </ContextMenuItem>
-            <ContextMenuItem variant="destructive">
-              <MdDelete />
-              <p>Delete</p>
-            </ContextMenuItem>
-          </ContextMenuContent>
+          {isThisUserMessage && (
+            <ContextMenuContent>
+              <ContextMenuItem>
+                <MdModeEdit />
+                <p>Edit</p>
+              </ContextMenuItem>
+              <ContextMenuItem variant="destructive">
+                <MdDelete />
+                <p>Delete</p>
+              </ContextMenuItem>
+            </ContextMenuContent>
+          )}
         </ContextMenu>
       </div>
     </>
