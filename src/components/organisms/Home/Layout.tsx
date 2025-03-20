@@ -5,11 +5,7 @@ import { memo } from "react";
 
 function Layout({ children }: LayoutProps) {
   return (
-    <SidebarProvider
-      style={{
-        "--sidebar-width": "20rem",
-      }}
-    >
+    <SidebarProvider>
       <AppSidebar />
       <main className="w-full bg-[url('/bg-test.png')] bg-center bg-fixed bg-cover z-0">
         <div className="w-full h-full fixed inset-0 backdrop-blur-xs -z-10"></div>
