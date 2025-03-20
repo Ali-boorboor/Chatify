@@ -1,7 +1,8 @@
+import Auth from "@/components/templates/Auth";
 import { memo } from "react";
 
 function AuthPage() {
-  return <div>AuthPage</div>;
+  return <Auth />;
 }
 
 export default memo(AuthPage);
