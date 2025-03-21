@@ -1,21 +1,27 @@
+import useStates from "@/hooks/useStates";
 import MainAvatar from "@/components/atoms/MainAvatar";
-import UserDataDrawer from "@/components/organisms/Home/UserDataDrawer";
+import UserDataDrawer from "@/components/organisms/Chat/UserDataDrawer";
 import NotificationBadge from "@/components/atoms/NotificationBadge";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { ChatItemProps } from "@/types/molecules/types";
 import { memo } from "react";
 
 function ChatItem({
+  chatID,
   imgSrc,
   chatTitle,
   notifCounts,
   lastChatText,
   fallBackText,
-  wrapperClassname,
 }: ChatItemProps) {
+  const { selectedChatID, setSelectedChatID } = useStates();
+
   return (
     <div
-      className={`flex items-center gap-3 px-3 py-2 cursor-pointer bg-accent text-foreground hover:opacity-60 transition-all duration-300 ease-linear ${wrapperClassname}`}
+      className={`flex items-center gap-3 px-3 py-2 cursor-pointer ${
+        selectedChatID === chatID ? "bg-chart-2" : "bg-accent"
+      } text-foreground hover:opacity-60 transition-all duration-300 ease-linear`}
+      onClick={() => setSelectedChatID(chatID)}
     >
       <Sheet>
         <SheetTrigger>

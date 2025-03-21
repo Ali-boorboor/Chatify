@@ -1,5 +1,5 @@
 import MainAvatar from "@/components/atoms/MainAvatar";
-import UserDataDrawer from "@/components/organisms/Home/UserDataDrawer";
+import UserDataDrawer from "@/components/organisms/Chat/UserDataDrawer";
 import UserDatasHoverCard from "@/components/atoms/UserDatasHoverCard";
 import { HoverCard, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";

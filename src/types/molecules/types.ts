@@ -1,9 +1,9 @@
 export type ChatItemProps = {
+  chatID: string;
   imgSrc?: string;
   chatTitle: string;
   fallBackText: string;
   lastChatText?: string;
-  wrapperClassname?: string;
   notifCounts?: string | number;
 };
 

@@ -7,12 +7,18 @@ export type UserDatas = {
 };
 
 export type StoreState = {
+  authSection: string;
+  isValidateEmail: boolean;
+  hasLoading: boolean;
   userDatas: UserDatas;
   token: string;
   messages: HomeMessages[];
   message: string;
-  chatID: string;
+  selectedChatID: string;
 
+  setAuthSection: (authSection: string) => void;
+  setIsValidateEmail: (isValidateEmail: boolean) => void;
+  setHasLoading: (hasLoading: boolean) => void;
   setUserID: (userID: string) => void;
   setUsername: (username: string) => void;
   setIdentifier: (identifier: string) => void;
@@ -20,5 +26,5 @@ export type StoreState = {
   setMessage: (message: string) => void;
   setMessages: (messages: HomeMessages[]) => void;
   addMessage: (newMessage: HomeMessages) => void;
-  setChatID: (chatID: string) => void;
+  setSelectedChatID: (selectedChatID: string) => void;
 };

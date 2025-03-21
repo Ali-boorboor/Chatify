@@ -1,4 +1,4 @@
-import AppSidebar from "@/components/organisms/Home/Sidebar";
+import AppSidebar from "@/components/organisms/Chat/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { LayoutProps } from "@/types/organisms/types";
 import { memo } from "react";

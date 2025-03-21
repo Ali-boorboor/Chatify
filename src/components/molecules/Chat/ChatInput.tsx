@@ -12,8 +12,8 @@ function ChatInput({ socket }: { socket: Socket }) {
   const handleMessageSubmit = () => {
     socket.emit("sendNewMessage", {
       chatID: "67d8825644546acc3be07d18",
+      senderID: userDatas?.userID,
       message,
-      senderID: "67d8683f0f3a3dab7dcc9e62",
     });
 
     setMessage("");

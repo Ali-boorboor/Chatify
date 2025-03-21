@@ -9,6 +9,7 @@ function MainAvatar({ imgSrc, fallBackText, className }: MainAvatarProps) {
     >
       <AvatarImage
         className="object-cover object-center"
+        crossOrigin="anonymous"
         src={imgSrc}
         alt="avatar"
       />

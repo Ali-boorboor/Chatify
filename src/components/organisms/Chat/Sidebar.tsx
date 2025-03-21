@@ -1,7 +1,8 @@
 import Divider from "@/components/atoms/Divider";
 import MainAvatar from "@/components/atoms/MainAvatar";
 import ChatItem from "@/components/molecules/Sidebar/ChatItem";
-import ChatItemSkeleton from "@/components/molecules/Sidebar/ChatItemSkeleton";
+import ChatItemSkeletons from "@/components/molecules/Sidebar/ChatItemSkeletons";
+import { useGetReq } from "@/hooks/useRequests";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { IoMdSettings } from "react-icons/io";
@@ -16,6 +17,14 @@ import {
 import { memo } from "react";
 
 function AppSidebar() {
+  const { data: chats, isLoading } = useGetReq({
+    url: "/chat",
+    queryKey: "CHATS",
+    cacheTime: 86400000,
+    staleTime: 86400000,
+    errorToastMsg: "Failed To Get Chats",
+  });
+
   return (
     <Sidebar className="border-r border-foreground">
       <SidebarHeader>
@@ -40,30 +49,24 @@ function AppSidebar() {
           <Divider />
         </SidebarGroupContent>
         <SidebarGroupContent>
-          <ChatItem
-            imgSrc="https://github.com/shadcn.png"
-            fallBackText="ab"
-            chatTitle="ali boorboor"
-            lastChatText="are you sure about that ?"
-            wrapperClassname="bg-chart-2"
-          />
           <Divider />
-          <ChatItem
-            imgSrc="https://github.com/shadcn.png"
-            fallBackText="ab"
-            chatTitle="ali boorboor"
-            lastChatText="are you sure about that ?"
-            notifCounts={3}
-          />
-          <Divider />
-          <ChatItem
-            imgSrc="https://github.com/shadcn.png"
-            fallBackText="ab"
-            chatTitle="ali boorboor"
-            lastChatText="are you sure about that ?"
-            notifCounts="2"
-          />
-          <ChatItemSkeleton />
+          {isLoading ? (
+            <ChatItemSkeletons />
+          ) : (
+            chats?.data?.data?.map((chat) => (
+              <>
+                <ChatItem
+                  notifCounts={3}
+                  chatID={chat?._id}
+                  imgSrc={chat?.cover}
+                  chatTitle={chat?.title}
+                  fallBackText={chat?.title?.slice(0, 2)}
+                  lastChatText="are you sure about that ?"
+                />
+                <Divider />
+              </>
+            ))
+          )}
         </SidebarGroupContent>
       </SidebarContent>
       <SidebarFooter>

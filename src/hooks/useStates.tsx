@@ -5,25 +5,34 @@ import { createJSONStorage, persist } from "zustand/middleware";
 const useStates = create<StoreState>()(
   persist(
     (set) => ({
+      // * auth sections state
+      authSection: "login",
+      setAuthSection: (authSection) => set({ authSection }),
+
+      // * is validate email section of auth available (state)
+      isValidateEmail: false,
+      setIsValidateEmail: (isValidateEmail) => set({ isValidateEmail }),
+
+      // * loading state
+      hasLoading: false,
+      setHasLoading: (hasLoading) => set({ hasLoading }),
+
       // * user datas state (will store in localStorage too)
       userDatas: {
         userID: "",
         username: "",
         identifier: "",
       },
-
       setUserID: (userID) => {
         return set((state) => ({
           userDatas: { ...state.userDatas, userID },
         }));
       },
-
       setUsername: (username) => {
         return set((state) => ({
           userDatas: { ...state.userDatas, username },
         }));
       },
-
       setIdentifier: (identifier) => {
         return set((state) => ({
           userDatas: { ...state.userDatas, identifier },
@@ -32,12 +41,10 @@ const useStates = create<StoreState>()(
 
       // * token state (will store in localStorage too)
       token: "",
-
       setToken: (token) => set({ token }),
 
       // * type new message input state
       messages: [],
-
       setMessages: (messages) => set({ messages }),
       addMessage: (newMessage) => {
         return set((state) => ({ messages: [...state.messages, newMessage] }));
@@ -45,13 +52,11 @@ const useStates = create<StoreState>()(
 
       // * type new message input state
       message: "",
-
       setMessage: (message) => set({ message }),
 
       // * chat id state that user is in it
-      chatID: "",
-
-      setChatID: (chatID) => set({ chatID }),
+      selectedChatID: "",
+      setSelectedChatID: (selectedChatID) => set({ selectedChatID }),
     }),
 
     // ^ localStorage states configs
