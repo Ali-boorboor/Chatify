@@ -6,15 +6,10 @@ import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { ChatItemProps } from "@/types/molecules/types";
 import { memo } from "react";
 
-function ChatItem({
-  chatID,
-  imgSrc,
-  chatTitle,
-  notifCounts,
-  lastChatText,
-  fallBackText,
-}: ChatItemProps) {
+function ChatItem({ chatID, imgSrc, chatTitle, fallBackText }: ChatItemProps) {
   const { selectedChatID, setSelectedChatID } = useStates();
+  const notifCounts = null;
+  const lastChatText = "test text";
 
   return (
     <div

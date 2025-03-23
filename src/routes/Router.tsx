@@ -23,7 +23,6 @@ const Routes = [
         </PrivateRoute>
       </SuspenseWrapper>
     ),
-    // children: [],
   },
 ];
 

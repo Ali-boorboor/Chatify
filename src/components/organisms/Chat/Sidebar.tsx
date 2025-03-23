@@ -1,7 +1,8 @@
 import Divider from "@/components/atoms/Divider";
 import MainAvatar from "@/components/atoms/MainAvatar";
-import ChatItem from "@/components/molecules/Sidebar/ChatItem";
+import ChatItemsList from "@/components/molecules/Sidebar/ChatItemsList";
 import ChatItemSkeletons from "@/components/molecules/Sidebar/ChatItemSkeletons";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import { useGetReq } from "@/hooks/useRequests";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,7 +27,7 @@ function AppSidebar() {
   });
 
   return (
-    <Sidebar className="border-r border-foreground">
+    <Sidebar className="border-r border-foreground z-50">
       <SidebarHeader>
         <MainAvatar
           imgSrc=""
@@ -52,20 +53,12 @@ function AppSidebar() {
           <Divider />
           {isLoading ? (
             <ChatItemSkeletons />
+          ) : chats?.status === 204 ? (
+            <Alert className="bg-yellow-500 text-black mt-2 text-center">
+              <AlertTitle>No Chat Found</AlertTitle>
+            </Alert>
           ) : (
-            chats?.data?.data?.map((chat) => (
-              <>
-                <ChatItem
-                  notifCounts={3}
-                  chatID={chat?._id}
-                  imgSrc={chat?.cover}
-                  chatTitle={chat?.title}
-                  fallBackText={chat?.title?.slice(0, 2)}
-                  lastChatText="are you sure about that ?"
-                />
-                <Divider />
-              </>
-            ))
+            <ChatItemsList chats={chats?.data?.data} />
           )}
         </SidebarGroupContent>
       </SidebarContent>

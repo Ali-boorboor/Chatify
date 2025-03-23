@@ -26,19 +26,21 @@ function Chat() {
   // });
 
   useEffect(() => {
-    socket.emit("joinChat", {
-      userID: userDatas?.userID,
-      chatID: selectedChatID,
-    });
+    if (selectedChatID) {
+      socket.emit("joinChat", {
+        userID: userDatas?.userID,
+        chatID: selectedChatID,
+      });
 
-    socket.on("chatHistory", (Messages) => {
-      setMessages(Messages);
-    });
+      socket.on("chatHistory", (Messages) => {
+        setMessages(Messages);
+      });
 
-    return () => {
-      socket.off("joinChat");
-      socket.off("chatHistory");
-    };
+      return () => {
+        socket.off("joinChat");
+        socket.off("chatHistory");
+      };
+    }
   }, [selectedChatID]);
 
   useEffect(() => {

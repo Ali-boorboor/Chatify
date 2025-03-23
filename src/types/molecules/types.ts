@@ -3,8 +3,10 @@ export type ChatItemProps = {
   imgSrc?: string;
   chatTitle: string;
   fallBackText: string;
-  lastChatText?: string;
-  notifCounts?: string | number;
+};
+
+export type ChatItemsListProps = {
+  chats: [{ _id: string; cover?: string; title: string }];
 };
 
 export type MainAvatarProps = {

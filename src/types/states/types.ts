@@ -12,6 +12,7 @@ export type StoreState = {
   hasLoading: boolean;
   userDatas: UserDatas;
   token: string;
+  selectedFolder: string;
   messages: HomeMessages[];
   message: string;
   selectedChatID: string;
@@ -23,6 +24,7 @@ export type StoreState = {
   setUsername: (username: string) => void;
   setIdentifier: (identifier: string) => void;
   setToken: (token: string) => void;
+  setSelectedFolder: (selectedFolder: string) => void;
   setMessage: (message: string) => void;
   setMessages: (messages: HomeMessages[]) => void;
   addMessage: (newMessage: HomeMessages) => void;

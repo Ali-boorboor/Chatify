@@ -17,11 +17,11 @@ function useGetReq({
   successToastMsg,
   refetchOnWindowFocus,
 }: useGetReqProps) {
-  const { setHasLoading } = useStates();
+  const { token, setHasLoading } = useStates();
 
   const { data, isSuccess, isError, isLoading } = useQuery(
     queryKey,
-    () => AxiosInstance.get(url),
+    () => AxiosInstance.get(url, { headers: { Authorization: token } }),
     {
       cacheTime: cacheTime || 0,
       staleTime: staleTime || 0,

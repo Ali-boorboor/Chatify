@@ -43,6 +43,10 @@ const useStates = create<StoreState>()(
       token: "",
       setToken: (token) => set({ token }),
 
+      // * selected folder state
+      selectedFolder: "all",
+      setSelectedFolder: (selectedFolder) => set({ selectedFolder }),
+
       // * type new message input state
       messages: [],
       setMessages: (messages) => set({ messages }),
