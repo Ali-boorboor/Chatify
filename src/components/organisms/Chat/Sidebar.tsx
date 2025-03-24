@@ -50,7 +50,9 @@ function AppSidebar() {
           ) : (
             <ChatItemsList
               chats={
-                selectedFolder === "all" ? data?.data?.data : data?.data?.chats
+                selectedFolder === "all"
+                  ? data?.data?.data
+                  : data?.data?.data?.chats
               }
             />
           )}

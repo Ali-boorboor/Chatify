@@ -5,7 +5,7 @@ import { Alert, AlertTitle } from "@/components/ui/alert";
 import { memo } from "react";
 
 function ChatItemsList({ chats }: ChatItemsListProps) {
-  if (!chats) {
+  if (!chats || chats.length <= 0) {
     return (
       <Alert className="bg-yellow-500 text-black mt-2 text-center">
         <AlertTitle>No Chat Found</AlertTitle>

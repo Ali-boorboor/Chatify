@@ -67,6 +67,28 @@ const useStates = create<StoreState>()(
       // * chat id state that user is in it
       selectedChatID: "",
       setSelectedChatID: (selectedChatID) => set({ selectedChatID }),
+
+      // * add chats to folder dialog (modal) state
+      isAddFolderModalOpen: false,
+      setIsAddFolderModalOpen: (isAddFolderModalOpen) => {
+        return set({ isAddFolderModalOpen });
+      },
+
+      // * add chats to folder state
+      selectedFolderChatValues: [],
+      setSelectedFolderChatValues: (selectedFolderChatValues) =>
+        set({ selectedFolderChatValues }),
+      toggleFolderChatSelection: (chat) => {
+        return set((state) => ({
+          selectedFolderChatValues: state.selectedFolderChatValues.some(
+            (item) => item.id === chat.id
+          )
+            ? state.selectedFolderChatValues.filter(
+                (item) => item.id !== chat.id
+              )
+            : [...state.selectedFolderChatValues, chat],
+        }));
+      },
     }),
 
     // ^ localStorage states configs

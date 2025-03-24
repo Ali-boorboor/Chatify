@@ -1,14 +1,24 @@
 import useStates from "@/hooks/useStates";
 import Divider from "@/components/atoms/Divider";
+import ToolTip from "@/components/atoms/ToolTip";
 import FolderSkeletons from "@/components/atoms/FolderSkeletons";
+import AddFolderDialogBox from "@/components/molecules/Sidebar/AddFolderDialogBox";
 import { folderItemsType } from "@/types/organisms/types";
 import { SidebarGroupContent } from "@/components/ui/sidebar";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useGetReq } from "@/hooks/useRequests";
+import { IoAddOutline } from "react-icons/io5";
 import { memo } from "react";
 
 function FolderItemsList() {
-  const { selectedFolder, setSelectedFolder } = useStates();
+  const {
+    setIsAddFolderModalOpen,
+    isAddFolderModalOpen,
+    selectedFolder,
+    setSelectedFolder,
+    setSelectedFolderChatValues,
+  } = useStates();
   const { data: folders, isLoading } = useGetReq({
     url: "/folder",
     queryKey: "FOLDERS",
@@ -48,6 +58,25 @@ function FolderItemsList() {
             </Button>
           ))
         )}
+        <ToolTip tooltipText="Add Folder">
+          <Dialog
+            open={isAddFolderModalOpen}
+            onOpenChange={() => {
+              !isAddFolderModalOpen && setSelectedFolderChatValues([]);
+              setIsAddFolderModalOpen(!isAddFolderModalOpen);
+            }}
+          >
+            <DialogTrigger
+              onClick={() => setIsAddFolderModalOpen(true)}
+              asChild
+            >
+              <Button className="bg-gray-400 hover:bg-gray-400">
+                <IoAddOutline />
+              </Button>
+            </DialogTrigger>
+            <AddFolderDialogBox />
+          </Dialog>
+        </ToolTip>
       </nav>
       <Divider />
     </SidebarGroupContent>

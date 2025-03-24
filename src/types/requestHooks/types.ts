@@ -13,6 +13,6 @@ export type usePostReqProps = {
   url: string;
   navigateTo?: string;
   errorToastMsg?: string;
-  refetchQueryKey?: string;
+  refetchQueryKey?: string | string[];
   successToastMsg?: string;
 };

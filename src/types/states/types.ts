@@ -17,6 +17,8 @@ export type StoreState = {
   messages: ChatMessages[];
   selectedChatInfo: ChatInfos | null;
   selectedChatID: string;
+  isAddFolderModalOpen: boolean;
+  selectedFolderChatValues: { id: string; title: string }[];
 
   setAuthSection: (authSection: string) => void;
   setIsValidateEmail: (isValidateEmail: boolean) => void;
@@ -31,4 +33,7 @@ export type StoreState = {
   addMessage: (newMessage: ChatMessages) => void;
   setSelectedChatInfo: (selectedChatInfo: ChatInfos | null) => void;
   setSelectedChatID: (selectedChatID: string) => void;
+  setIsAddFolderModalOpen: (isAddFolderModalOpen: boolean) => void;
+  toggleFolderChatSelection: (value: { id: string; title: string }) => void;
+  setSelectedFolderChatValues: (selectedFolderChatValues: []) => void;
 };
