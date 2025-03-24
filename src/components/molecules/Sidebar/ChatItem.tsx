@@ -6,7 +6,14 @@ import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { ChatItemProps } from "@/types/molecules/types";
 import { memo } from "react";
 
-function ChatItem({ chatID, imgSrc, chatTitle, fallBackText }: ChatItemProps) {
+function ChatItem({
+  chatID,
+  imgSrc,
+  chatTitle,
+  fallBackText,
+  identifier,
+  description,
+}: ChatItemProps) {
   const { selectedChatID, setSelectedChatID } = useStates();
   const notifCounts = null;
   const lastChatText = "test text";
@@ -26,7 +33,12 @@ function ChatItem({ chatID, imgSrc, chatTitle, fallBackText }: ChatItemProps) {
             className="cursor-pointer"
           />
         </SheetTrigger>
-        <UserDataDrawer />
+        <UserDataDrawer
+          title={chatTitle}
+          cover={imgSrc}
+          identifier={identifier}
+          description={description}
+        />
       </Sheet>
       <div>
         <p className="font-semibold capitalize w-44 md:w-48 overflow-hidden text-ellipsis whitespace-nowrap drop-shadow-lg">

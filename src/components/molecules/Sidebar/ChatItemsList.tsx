@@ -20,6 +20,8 @@ function ChatItemsList({ chats }: ChatItemsListProps) {
         imgSrc={chat?.cover}
         chatTitle={chat?.title}
         fallBackText={chat?.title?.slice(0, 2)}
+        identifier={chat?.identifier}
+        description={chat?.description}
       />
       <Divider />
     </div>

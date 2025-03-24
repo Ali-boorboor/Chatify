@@ -7,7 +7,8 @@ import { Form, Formik } from "formik";
 import { memo, useEffect } from "react";
 
 function Login() {
-  const { setUserID, setUsername, setIdentifier, setToken } = useStates();
+  const { setUserID, setCover, setUsername, setIdentifier, setToken } =
+    useStates();
   const {
     mutate: PostReq,
     isSuccess,
@@ -22,6 +23,7 @@ function Login() {
   useEffect(() => {
     if (isSuccess) {
       setToken(`Bearer ${data?.data?.data?.token}`);
+      setCover(data?.data?.data?.userInfo?.cover);
       setUserID(data?.data?.data?.userInfo?.userID);
       setUsername(data?.data?.data?.userInfo?.username);
       setIdentifier(data?.data?.data?.userInfo?.identifier);

@@ -19,6 +19,9 @@ function ChatBubble({
   imgSrc,
   fallBackText,
   message,
+  username,
+  identifier,
+  description,
 }: ChatBubbleProps) {
   return (
     <>
@@ -40,13 +43,18 @@ function ChatBubble({
                     />
                   </HoverCardTrigger>
                   <UserDatasHoverCard
-                    imgSrc=""
-                    fallBackText="sb"
-                    username="sarabayat"
-                    identifier="@sara-bayatam"
+                    imgSrc={imgSrc}
+                    fallBackText={fallBackText}
+                    username={username}
+                    identifier={identifier}
                   />
                 </SheetTrigger>
-                <UserDataDrawer />
+                <UserDataDrawer
+                  title={username}
+                  identifier={identifier}
+                  cover={imgSrc}
+                  description={description}
+                />
               </HoverCard>
             </Sheet>
           )}

@@ -3,10 +3,20 @@ export type ChatItemProps = {
   imgSrc?: string;
   chatTitle: string;
   fallBackText: string;
+  identifier: string;
+  description?: string;
 };
 
 export type ChatItemsListProps = {
-  chats: [{ _id: string; cover?: string; title: string }];
+  chats: [
+    {
+      _id: string;
+      cover?: string;
+      title: string;
+      identifier: string;
+      description?: string;
+    }
+  ];
 };
 
 export type MainAvatarProps = {
@@ -20,6 +30,9 @@ export type ChatBubbleProps = {
   message: string;
   fallBackText: string;
   isThisUserMessage: boolean;
+  username: string;
+  identifier: string;
+  description?: string;
 };
 
 export type ChatInputFormValues = {

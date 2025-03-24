@@ -6,24 +6,22 @@ import ChatBubble from "@/components/molecules/Chat/ChatBubble";
 import UserDataDrawer from "@/components/organisms/Chat/UserDataDrawer";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { HomeMessages } from "@/types/templates/types";
-import { useGetReq } from "@/hooks/useRequests";
+import { ChatInfos, ChatMessages } from "@/types/templates/types";
 import { memo, useEffect } from "react";
 import { io } from "socket.io-client";
 
 const socket = io("http://localhost:4030/");
 
 function Chat() {
-  const { selectedChatID, messages, userDatas, setMessages, addMessage } =
-    useStates();
-
-  // const { data: chats, isLoading } = useGetReq({
-  //   url: "/chat",
-  //   queryKey: "CHATS",
-  //   cacheTime: 86400000,
-  //   staleTime: 86400000,
-  //   errorToastMsg: "Failed To Get Chats",
-  // });
+  const {
+    selectedChatID,
+    messages,
+    userDatas,
+    selectedChatInfo,
+    setMessages,
+    addMessage,
+    setSelectedChatInfo,
+  } = useStates();
 
   useEffect(() => {
     if (selectedChatID) {
@@ -32,14 +30,13 @@ function Chat() {
         chatID: selectedChatID,
       });
 
+      socket.on("chatInfo", (ChatInfos: ChatInfos) => {
+        setSelectedChatInfo(ChatInfos);
+      });
+
       socket.on("chatHistory", (Messages) => {
         setMessages(Messages);
       });
-
-      return () => {
-        socket.off("joinChat");
-        socket.off("chatHistory");
-      };
     }
   }, [selectedChatID]);
 
@@ -64,34 +61,43 @@ function Chat() {
                 {selectedChatID && (
                   <SheetTrigger>
                     <MainAvatar
-                      imgSrc=""
-                      fallBackText="sb"
+                      imgSrc={selectedChatInfo?.cover}
+                      fallBackText={selectedChatInfo?.title?.slice(0, 2)!}
                       className="md:w-10 md:h-10"
                     />
                   </SheetTrigger>
                 )}
                 <div className="flex flex-col gap-0.5">
                   <p className="font-semibold capitalize w-60 overflow-hidden text-ellipsis whitespace-nowrap drop-shadow-lg">
-                    {selectedChatID ? "test" : "select a chat to view"}
+                    {selectedChatID
+                      ? selectedChatInfo?.title
+                      : "select a chat to view"}
                   </p>
                   <p className="font-semibold text-sm text-gray-400 italic lowercase">
                     {selectedChatID && "last seen recently"}
                   </p>
                 </div>
               </div>
-              <UserDataDrawer />
+              <UserDataDrawer
+                title={selectedChatInfo?.title!}
+                cover={selectedChatInfo?.cover}
+                identifier={selectedChatInfo?.identifier!}
+                description={selectedChatInfo?.description}
+              />
             </Sheet>
           </nav>
         </header>
         {selectedChatID && (
           <>
-            <div className="flex h-full flex-col justify-start gap-4 py-4 px-6 md:px-20 xl:px-40">
-              {messages?.map((message: HomeMessages) => {
+            <main className="flex h-full flex-col justify-start gap-4 py-4 px-6 md:px-20 xl:px-40">
+              {messages?.map((message: ChatMessages) => {
                 return (
                   <ChatBubble
                     key={message?._id}
                     message={message?.message}
                     imgSrc={message?.sender?.cover}
+                    username={message?.sender?.username}
+                    identifier={message?.sender?.identifier}
                     fallBackText={message?.sender?.username?.slice(0, 2)}
                     isThisUserMessage={
                       message?.sender?._id === userDatas?.userID
@@ -99,12 +105,12 @@ function Chat() {
                   />
                 );
               })}
-            </div>
-            <div className="sticky bottom-0 z-50 md:pb-4 md:px-20 xl:px-40 backdrop-blur-xs drop-shadow-lg">
+            </main>
+            <footer className="sticky bottom-0 z-50 md:pb-4 md:px-20 xl:px-40 backdrop-blur-xs drop-shadow-lg">
               <div className="bg-accent p-4 md:rounded-xl">
                 <ChatInput socket={socket} />
               </div>
-            </div>
+            </footer>
           </>
         )}
       </div>

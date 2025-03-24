@@ -6,3 +6,10 @@ export type folderItemsType = {
   href: string;
   chats: [];
 };
+
+export type UserDataDrawerProps = {
+  title: string;
+  cover?: string;
+  identifier: string;
+  description?: string;
+};

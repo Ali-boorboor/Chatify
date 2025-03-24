@@ -1,6 +1,7 @@
-import { HomeMessages } from "@/types/templates/types";
+import { ChatMessages, ChatInfos } from "@/types/templates/types";
 
 export type UserDatas = {
+  cover?: string;
   userID: string;
   username: string;
   identifier: string;
@@ -13,18 +14,21 @@ export type StoreState = {
   userDatas: UserDatas;
   token: string;
   selectedFolder: string;
-  messages: HomeMessages[];
+  messages: ChatMessages[];
+  selectedChatInfo: ChatInfos | null;
   selectedChatID: string;
 
   setAuthSection: (authSection: string) => void;
   setIsValidateEmail: (isValidateEmail: boolean) => void;
   setHasLoading: (hasLoading: boolean) => void;
+  setCover: (cover: string) => void;
   setUserID: (userID: string) => void;
   setUsername: (username: string) => void;
   setIdentifier: (identifier: string) => void;
   setToken: (token: string) => void;
   setSelectedFolder: (selectedFolder: string) => void;
-  setMessages: (messages: HomeMessages[]) => void;
-  addMessage: (newMessage: HomeMessages) => void;
+  setMessages: (messages: ChatMessages[]) => void;
+  addMessage: (newMessage: ChatMessages) => void;
+  setSelectedChatInfo: (selectedChatInfo: ChatInfos | null) => void;
   setSelectedChatID: (selectedChatID: string) => void;
 };

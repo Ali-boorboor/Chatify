@@ -19,6 +19,7 @@ const useStates = create<StoreState>()(
 
       // * user datas state (will store in localStorage too)
       userDatas: {
+        cover: "",
         userID: "",
         username: "",
         identifier: "",
@@ -26,6 +27,11 @@ const useStates = create<StoreState>()(
       setUserID: (userID) => {
         return set((state) => ({
           userDatas: { ...state.userDatas, userID },
+        }));
+      },
+      setCover: (cover) => {
+        return set((state) => ({
+          userDatas: { ...state.userDatas, cover },
         }));
       },
       setUsername: (username) => {
@@ -53,6 +59,10 @@ const useStates = create<StoreState>()(
       addMessage: (newMessage) => {
         return set((state) => ({ messages: [...state.messages, newMessage] }));
       },
+
+      // * chat Info state that user is in it
+      selectedChatInfo: null,
+      setSelectedChatInfo: (selectedChatInfo) => set({ selectedChatInfo }),
 
       // * chat id state that user is in it
       selectedChatID: "",

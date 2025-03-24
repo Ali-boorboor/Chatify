@@ -19,7 +19,7 @@ import {
 import { memo } from "react";
 
 function AppSidebar() {
-  const { token, selectedFolder } = useStates();
+  const { token, selectedFolder, userDatas } = useStates();
   const { data, isLoading } = useGetFolderChats(selectedFolder);
   const { mutate: logoutRequest } = usePostReq({
     url: "/auth/logout",
@@ -32,12 +32,12 @@ function AppSidebar() {
     <Sidebar className="border-r border-foreground z-50">
       <SidebarHeader>
         <MainAvatar
-          imgSrc=""
-          fallBackText="ab"
+          imgSrc={userDatas?.cover}
+          fallBackText={userDatas?.username?.slice(0, 2)}
           className="mx-auto my-1 ring-chart-2"
         />
         <h1 className="text-center capitalize text-md md:text-xl font-bold">
-          ali boorboor
+          {userDatas?.username}
         </h1>
         <Input type="text" placeholder="Search" />
       </SidebarHeader>
