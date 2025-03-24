@@ -34,7 +34,21 @@ function ChatInput({ socket }: { socket: Socket }) {
               name="message"
               placeholder="Type Message"
               value={values.message}
-              onChange={handleChange}
+              onBlur={() => {
+                socket.emit("isTyping", {
+                  userID: userDatas.userID,
+                  chatID: selectedChatID,
+                  isTyping: false,
+                });
+              }}
+              onChange={(e) => {
+                handleChange(e);
+                socket.emit("isTyping", {
+                  userID: userDatas.userID,
+                  chatID: selectedChatID,
+                  isTyping: true,
+                });
+              }}
             />
             <ToolTip tooltipText="Send Message">
               <Button variant="green" type="submit">

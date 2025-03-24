@@ -7,12 +7,16 @@ import UserDataDrawer from "@/components/organisms/Chat/UserDataDrawer";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { ChatInfos, ChatMessages } from "@/types/templates/types";
-import { memo, useEffect } from "react";
+import { memo, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 const socket = io("http://localhost:4030/");
 
 function Chat() {
+  const [UserTypingData, setUserTypingData] = useState({
+    isTyping: false,
+    username: "",
+  });
   const {
     selectedChatID,
     messages,
@@ -22,6 +26,13 @@ function Chat() {
     addMessage,
     setSelectedChatInfo,
   } = useStates();
+
+  socket.on(
+    "isTyping",
+    ({ isTyping, username }: { isTyping: boolean; username: string }) => {
+      setUserTypingData({ isTyping, username });
+    }
+  );
 
   useEffect(() => {
     if (selectedChatID) {
@@ -74,7 +85,11 @@ function Chat() {
                       : "select a chat to view"}
                   </p>
                   <p className="font-semibold text-sm text-gray-400 italic lowercase">
-                    {selectedChatID && "last seen recently"}
+                    {selectedChatID && UserTypingData?.isTyping
+                      ? `${UserTypingData?.username} is typing`
+                      : selectedChatID
+                      ? "last seen recently"
+                      : null}
                   </p>
                 </div>
               </div>
