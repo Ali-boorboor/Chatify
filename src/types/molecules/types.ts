@@ -21,3 +21,7 @@ export type ChatBubbleProps = {
   fallBackText: string;
   isThisUserMessage: boolean;
 };
+
+export type ChatInputFormValues = {
+  message: string;
+};

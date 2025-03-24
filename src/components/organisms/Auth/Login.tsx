@@ -32,7 +32,9 @@ function Login() {
     <Formik
       initialValues={{ identifier: "", password: "" }}
       onSubmit={(values, { resetForm }) => {
-        PostReq({ identifier: values.identifier, password: values.password });
+        PostReq({
+          body: { identifier: values.identifier, password: values.password },
+        });
 
         resetForm();
       }}

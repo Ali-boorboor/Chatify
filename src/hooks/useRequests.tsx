@@ -3,6 +3,7 @@ import AxiosInstance from "@/utils/AxiosInstance";
 import { useGetReqProps, usePostReqProps } from "@/types/requestHooks/types";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { AxiosRequestConfig } from "axios";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
@@ -42,6 +43,27 @@ function useGetReq({
   return { data, isSuccess, isError, isLoading };
 }
 
+// ^ useGetReq hook to get one folder chats
+const useGetFolderChats = (selectedFolder: string) => {
+  if (selectedFolder === "all") {
+    return useGetReq({
+      url: "/chat",
+      queryKey: "CHATS",
+      cacheTime: 86400000,
+      staleTime: 86400000,
+      errorToastMsg: "Failed To Get Chats",
+    });
+  } else {
+    return useGetReq({
+      url: `/folder/${selectedFolder}`,
+      queryKey: `FOLDER-${selectedFolder}-CHATS`,
+      cacheTime: 86400000,
+      staleTime: 86400000,
+      errorToastMsg: "Failed To Get Folder Chats",
+    });
+  }
+};
+
 // ^ usePostReq hook for all post requests
 function usePostReq({
   url,
@@ -55,8 +77,8 @@ function usePostReq({
   const navigate = useNavigate();
 
   const { data, isSuccess, isError, isLoading, mutate } = useMutation(
-    (options: object) => {
-      return AxiosInstance.post(url, options);
+    ({ body, config }: { body?: any; config?: AxiosRequestConfig }) => {
+      return AxiosInstance.post(url, body, config);
     },
     {
       onSuccess: () => {
@@ -77,4 +99,4 @@ function usePostReq({
   return { data, isSuccess, isError, isLoading, mutate };
 }
 
-export { useGetReq, usePostReq };
+export { useGetReq, useGetFolderChats, usePostReq };

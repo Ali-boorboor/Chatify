@@ -54,10 +54,6 @@ const useStates = create<StoreState>()(
         return set((state) => ({ messages: [...state.messages, newMessage] }));
       },
 
-      // * type new message input state
-      message: "",
-      setMessage: (message) => set({ message }),
-
       // * chat id state that user is in it
       selectedChatID: "",
       setSelectedChatID: (selectedChatID) => set({ selectedChatID }),

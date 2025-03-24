@@ -42,7 +42,7 @@ function Signup() {
         formData.append("username", values.username);
         formData.append("password", values.password);
 
-        PostReq(formData);
+        PostReq({ body: formData });
 
         resetForm();
       }}

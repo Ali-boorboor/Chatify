@@ -85,8 +85,8 @@ function Chat() {
         </header>
         {selectedChatID && (
           <>
-            <main className="flex h-full flex-col justify-start gap-4 py-4 px-6 md:px-20 xl:px-40">
-              {messages.map((message: HomeMessages) => {
+            <div className="flex h-full flex-col justify-start gap-4 py-4 px-6 md:px-20 xl:px-40">
+              {messages?.map((message: HomeMessages) => {
                 return (
                   <ChatBubble
                     key={message?._id}
@@ -99,12 +99,12 @@ function Chat() {
                   />
                 );
               })}
-            </main>
-            <footer className="sticky bottom-0 z-50 md:pb-4 md:px-20 xl:px-40 backdrop-blur-xs drop-shadow-lg">
+            </div>
+            <div className="sticky bottom-0 z-50 md:pb-4 md:px-20 xl:px-40 backdrop-blur-xs drop-shadow-lg">
               <div className="bg-accent p-4 md:rounded-xl">
                 <ChatInput socket={socket} />
               </div>
-            </footer>
+            </div>
           </>
         )}
       </div>

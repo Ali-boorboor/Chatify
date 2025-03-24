@@ -14,7 +14,6 @@ export type StoreState = {
   token: string;
   selectedFolder: string;
   messages: HomeMessages[];
-  message: string;
   selectedChatID: string;
 
   setAuthSection: (authSection: string) => void;
@@ -25,7 +24,6 @@ export type StoreState = {
   setIdentifier: (identifier: string) => void;
   setToken: (token: string) => void;
   setSelectedFolder: (selectedFolder: string) => void;
-  setMessage: (message: string) => void;
   setMessages: (messages: HomeMessages[]) => void;
   addMessage: (newMessage: HomeMessages) => void;
   setSelectedChatID: (selectedChatID: string) => void;

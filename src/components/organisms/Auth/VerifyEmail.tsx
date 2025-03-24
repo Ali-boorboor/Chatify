@@ -30,7 +30,7 @@ function VerifyEmail() {
     <Formik
       initialValues={{ code: "" }}
       onSubmit={(values, { resetForm }) => {
-        PostReq({ code: values.code });
+        PostReq({ body: { code: values.code } });
         resetForm();
       }}
     >

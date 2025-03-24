@@ -15,7 +15,6 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isError) {
       navigate("/auth");
-      localStorage.clear();
     }
   }, [isError]);
 
