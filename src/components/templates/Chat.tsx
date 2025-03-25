@@ -17,6 +17,7 @@ function Chat() {
     isTyping: false,
     username: "",
   });
+  const [onlineUsersCount, setOnlineUsersCount] = useState(0);
   const {
     selectedChatID,
     messages,
@@ -27,17 +28,9 @@ function Chat() {
     setSelectedChatInfo,
   } = useStates();
 
-  socket.on(
-    "isTyping",
-    ({ isTyping, username }: { isTyping: boolean; username: string }) => {
-      setUserTypingData({ isTyping, username });
-    }
-  );
-
   useEffect(() => {
     if (selectedChatID) {
       socket.emit("joinChat", {
-        userID: userDatas?.userID,
         chatID: selectedChatID,
       });
 
@@ -49,7 +42,33 @@ function Chat() {
         setMessages(Messages);
       });
     }
+
+    return () => {
+      socket.off("joinChat");
+      socket.off("chatInfo");
+      socket.off("chatHistory");
+      socket.emit("leaveChat", selectedChatID);
+      socket.off("leaveChat");
+    };
   }, [selectedChatID]);
+
+  useEffect(() => {
+    socket.on(
+      "isTyping",
+      ({ isTyping, username }: { isTyping: boolean; username: string }) => {
+        setUserTypingData({ isTyping, username });
+      }
+    );
+
+    socket.on("onlineUsers", (onlineUsers) => {
+      setOnlineUsersCount(onlineUsers);
+    });
+
+    return () => {
+      socket.off("isTyping");
+      socket.off("onlineUsers");
+    };
+  }, [selectedChatID, UserTypingData, onlineUsersCount]);
 
   useEffect(() => {
     socket.on("newMessage", (newMessage) => {
@@ -88,7 +107,9 @@ function Chat() {
                     {selectedChatID && UserTypingData?.isTyping
                       ? `${UserTypingData?.username} is typing`
                       : selectedChatID
-                      ? "last seen recently"
+                      ? `${onlineUsersCount} online ${
+                          onlineUsersCount <= 1 ? "user" : "users"
+                        }`
                       : null}
                   </p>
                 </div>
