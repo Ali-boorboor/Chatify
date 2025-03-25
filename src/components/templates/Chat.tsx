@@ -1,4 +1,5 @@
 import useStates from "@/hooks/useStates";
+import ToolTip from "@/components/atoms/ToolTip";
 import Layout from "@/components/organisms/Chat/Layout";
 import MainAvatar from "@/components/atoms/MainAvatar";
 import ChatInput from "@/components/molecules/Chat/ChatInput";
@@ -7,12 +8,15 @@ import UserDataDrawer from "@/components/organisms/Chat/UserDataDrawer";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { ChatInfos, ChatMessages } from "@/types/templates/types";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { FaChevronDown } from "react-icons/fa6";
 import { io } from "socket.io-client";
 
 const socket = io("http://localhost:4030/");
 
 function Chat() {
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const [UserTypingData, setUserTypingData] = useState({
     isTyping: false,
     username: "",
@@ -27,6 +31,12 @@ function Chat() {
     addMessage,
     setSelectedChatInfo,
   } = useStates();
+
+  const scrollDown = () => {
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+
+  useEffect(scrollDown, [messages, selectedChatID]);
 
   useEffect(() => {
     if (selectedChatID) {
@@ -125,7 +135,10 @@ function Chat() {
         </header>
         {selectedChatID && (
           <>
-            <main className="flex h-full flex-col justify-start gap-4 py-4 px-6 md:px-20 xl:px-40">
+            <main
+              className="flex h-full flex-col justify-start gap-4 py-4 px-6 md:px-20 xl:px-40"
+              ref={chatContainerRef}
+            >
               {messages?.map((message: ChatMessages) => {
                 return (
                   <ChatBubble
@@ -145,6 +158,21 @@ function Chat() {
             <footer className="sticky bottom-0 z-50 md:pb-4 md:px-20 xl:px-40 backdrop-blur-xs drop-shadow-lg">
               <div className="bg-accent p-4 md:rounded-xl">
                 <ChatInput socket={socket} />
+                <ToolTip tooltipText="Scroll Bottom">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={scrollDown}
+                    className={`rounded-full fixed bottom-32 md:right-40 right-20 ring-2 ring-foreground z-50 ${
+                      window.innerHeight + window.scrollY >=
+                      document.body.scrollHeight
+                        ? "hidden"
+                        : "block"
+                    }`}
+                  >
+                    <FaChevronDown />
+                  </Button>
+                </ToolTip>
               </div>
             </footer>
           </>
