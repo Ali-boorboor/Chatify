@@ -1,4 +1,4 @@
-import { ChatMessages, ChatInfos } from "@/types/templates/types";
+import { ChatMessages, ChatInfos, ChatMedias } from "@/types/templates/types";
 
 export type UserDatas = {
   cover?: string;
@@ -15,6 +15,7 @@ export type StoreState = {
   token: string;
   selectedFolder: string;
   messages: ChatMessages[];
+  medias: ChatMedias[];
   selectedChatInfo: ChatInfos | null;
   selectedChatID: string;
   isAddFolderModalOpen: boolean;
@@ -31,6 +32,8 @@ export type StoreState = {
   setSelectedFolder: (selectedFolder: string) => void;
   setMessages: (messages: ChatMessages[]) => void;
   addMessage: (newMessage: ChatMessages) => void;
+  setMedias: (medias: ChatMedias[]) => void;
+  addMedia: (newMedia: ChatMedias) => void;
   setSelectedChatInfo: (selectedChatInfo: ChatInfos | null) => void;
   setSelectedChatID: (selectedChatID: string) => void;
   setIsAddFolderModalOpen: (isAddFolderModalOpen: boolean) => void;

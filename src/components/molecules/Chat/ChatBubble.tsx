@@ -19,6 +19,7 @@ function ChatBubble({
   imgSrc,
   fallBackText,
   message,
+  media,
   username,
   identifier,
   description,
@@ -59,18 +60,29 @@ function ChatBubble({
             </Sheet>
           )}
           <ContextMenuTrigger>
-            <p
+            <div
               className={`break-all max-w-6xl text-foreground rounded-xl px-4 py-2 relative z-10 drop-shadow-lg ${
                 isThisUserMessage ? "bg-chart-2" : "bg-accent"
               }`}
             >
-              {message}
+              {message ? (
+                <span>{message}</span>
+              ) : (
+                <div className="max-w-4xl h-auto">
+                  <img
+                    src={media}
+                    crossOrigin="anonymous"
+                    alt="media"
+                    className="w-full h-full rounded-xl object-cover object-center"
+                  />
+                </div>
+              )}
               <span
                 className={`absolute w-4 h-4 bg-inherit rotate-45 -z-10 top-3 ${
                   isThisUserMessage ? "-right-1" : "-left-1"
                 }`}
               ></span>
-            </p>
+            </div>
           </ContextMenuTrigger>
           {isThisUserMessage && (
             <MainAvatar
@@ -81,10 +93,12 @@ function ChatBubble({
           )}
           {isThisUserMessage && (
             <ContextMenuContent>
-              <ContextMenuItem>
-                <MdModeEdit />
-                <p>Edit</p>
-              </ContextMenuItem>
+              {message && (
+                <ContextMenuItem>
+                  <MdModeEdit />
+                  <p>Edit</p>
+                </ContextMenuItem>
+              )}
               <ContextMenuItem variant="destructive">
                 <MdDelete />
                 <p>Delete</p>

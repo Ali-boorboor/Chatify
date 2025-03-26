@@ -1,22 +1,18 @@
 import useStates from "@/hooks/useStates";
-import ToolTip from "@/components/atoms/ToolTip";
-import Layout from "@/components/organisms/Chat/Layout";
 import MainAvatar from "@/components/atoms/MainAvatar";
+import Layout from "@/components/organisms/Chat/Layout";
 import ChatInput from "@/components/molecules/Chat/ChatInput";
 import ChatBubble from "@/components/molecules/Chat/ChatBubble";
 import UserDataDrawer from "@/components/organisms/Chat/UserDataDrawer";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { memo, useEffect, useMemo, useState } from "react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { ChatInfos, ChatMessages } from "@/types/templates/types";
-import { memo, useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { FaChevronDown } from "react-icons/fa6";
+import { ChatInfos } from "@/types/templates/types";
 import { io } from "socket.io-client";
 
 const socket = io("http://192.168.1.100:4030/");
 
 function Chat() {
-  const chatContainerRef = useRef<HTMLDivElement>(null);
   const [UserTypingData, setUserTypingData] = useState({
     isTyping: false,
     username: "",
@@ -25,18 +21,17 @@ function Chat() {
   const {
     selectedChatID,
     messages,
+    medias,
     userDatas,
     selectedChatInfo,
     setMessages,
     addMessage,
+    setMedias,
+    addMedia,
     setSelectedChatInfo,
   } = useStates();
 
-  const scrollDown = () => {
-    window.scrollTo(0, document.body.scrollHeight);
-  };
-
-  useEffect(scrollDown, [messages, selectedChatID]);
+  useEffect(() => window.scrollTo(0, document.body.scrollHeight));
 
   useEffect(() => {
     if (selectedChatID) {
@@ -44,19 +39,16 @@ function Chat() {
         chatID: selectedChatID,
       });
 
-      socket.on("chatInfo", (ChatInfos: ChatInfos) => {
+      socket.on("chatInfos", (ChatInfos: ChatInfos) => {
         setSelectedChatInfo(ChatInfos);
-      });
-
-      socket.on("chatHistory", (Messages) => {
-        setMessages(Messages);
+        setMessages(ChatInfos?.messages);
+        setMedias(ChatInfos?.medias);
       });
     }
 
     return () => {
       socket.off("joinChat");
       socket.off("chatInfo");
-      socket.off("chatHistory");
       socket.emit("leaveChat", selectedChatID);
       socket.off("leaveChat");
     };
@@ -85,10 +77,39 @@ function Chat() {
       addMessage(newMessage);
     });
 
+    socket.on("newMedia", (newMedia) => {
+      addMedia(newMedia);
+    });
+
     return () => {
       socket.off("newMessage");
+      socket.off("newMedia");
     };
-  }, [addMessage]);
+  }, [addMessage, addMedia]);
+
+  const combinedItems = useMemo(() => {
+    const safeMessages = messages || [];
+    const safeMedias = medias || [];
+
+    const combined = [
+      ...safeMessages.map((msg) => ({
+        ...msg,
+        type: "message",
+        message: msg.message,
+        media: undefined,
+      })),
+      ...safeMedias.map((media) => ({
+        ...media,
+        type: "media",
+        message: undefined,
+        media: media.media,
+      })),
+    ];
+
+    return combined.sort((a, b) => {
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+    });
+  }, [messages, medias]);
 
   return (
     <Layout>
@@ -137,44 +158,23 @@ function Chat() {
         </header>
         {selectedChatID && (
           <>
-            <main
-              className="flex h-full flex-col justify-start gap-4 py-4 px-6 md:px-20 xl:px-40"
-              ref={chatContainerRef}
-            >
-              {messages?.map((message: ChatMessages) => {
-                return (
-                  <ChatBubble
-                    key={message?._id}
-                    message={message?.message}
-                    imgSrc={message?.sender?.cover}
-                    username={message?.sender?.username}
-                    identifier={message?.sender?.identifier}
-                    fallBackText={message?.sender?.username?.slice(0, 2)}
-                    isThisUserMessage={
-                      message?.sender?._id === userDatas?.userID
-                    }
-                  />
-                );
-              })}
+            <main className="flex h-full flex-col justify-start gap-4 py-4 px-6 md:px-20 xl:px-40">
+              {combinedItems?.map((item, index) => (
+                <ChatBubble
+                  key={item._id || index}
+                  isThisUserMessage={item?.sender?._id === userDatas?.userID}
+                  fallBackText={item?.sender?.username?.slice(0, 2)}
+                  username={item?.sender?.username}
+                  identifier={item?.sender?.identifier}
+                  description={item?.sender?.description}
+                  message={item.type === "message" ? item.message : undefined}
+                  media={item.type === "media" ? item.media : undefined}
+                />
+              ))}
             </main>
             <footer className="sticky bottom-0 z-50 md:pb-4 md:px-20 xl:px-40 backdrop-blur-xs drop-shadow-lg">
               <div className="bg-accent p-4 md:rounded-xl">
                 <ChatInput socket={socket} />
-                <ToolTip tooltipText="Scroll Bottom">
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    onClick={scrollDown}
-                    className={`rounded-full fixed bottom-20 md:bottom-32 xl:right-40 md:right-20 right-4 ring-2 ring-foreground z-50 ${
-                      window.innerHeight + window.scrollY >=
-                      document.body.scrollHeight
-                        ? "hidden"
-                        : "block"
-                    }`}
-                  >
-                    <FaChevronDown />
-                  </Button>
-                </ToolTip>
               </div>
             </footer>
           </>

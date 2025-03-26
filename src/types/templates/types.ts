@@ -1,7 +1,27 @@
 export type ChatMessages = {
   _id: string;
   message: string;
-  sender: { _id: string; username: string; identifier: string; cover: string };
+  createdAt: Date;
+  sender: {
+    _id: string;
+    username: string;
+    identifier: string;
+    cover: string;
+    description?: string;
+  };
+};
+
+export type ChatMedias = {
+  _id: string;
+  media: string;
+  createdAt: Date;
+  sender: {
+    _id: string;
+    username: string;
+    identifier: string;
+    cover: string;
+    description?: string;
+  };
 };
 
 export type ChatInfos = {
@@ -10,4 +30,6 @@ export type ChatInfos = {
   cover?: string;
   description?: string;
   identifier: string;
+  messages: ChatMessages[];
+  medias: ChatMedias[];
 };

@@ -27,7 +27,8 @@ export type MainAvatarProps = {
 
 export type ChatBubbleProps = {
   imgSrc?: string;
-  message: string;
+  message?: string;
+  media?: string;
   fallBackText: string;
   isThisUserMessage: boolean;
   username: string;
