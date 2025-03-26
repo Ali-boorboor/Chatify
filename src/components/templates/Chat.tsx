@@ -114,13 +114,15 @@ function Chat() {
                       : "select a chat to view"}
                   </p>
                   <p className="font-semibold text-sm text-gray-400 italic lowercase">
-                    {selectedChatID && UserTypingData?.isTyping
-                      ? `${UserTypingData?.username} is typing`
-                      : selectedChatID
-                      ? `${onlineUsersCount} online ${
-                          onlineUsersCount <= 1 ? "user" : "users"
-                        }`
-                      : null}
+                    {selectedChatID && UserTypingData?.isTyping ? (
+                      <span className="animate-pulse">
+                        {UserTypingData?.username} is typing...
+                      </span>
+                    ) : selectedChatID ? (
+                      `${onlineUsersCount} online ${
+                        onlineUsersCount <= 1 ? "user" : "users"
+                      }`
+                    ) : null}
                   </p>
                 </div>
               </div>
