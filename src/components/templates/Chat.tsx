@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { FaChevronDown } from "react-icons/fa6";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:4030/");
+const socket = io("http://192.168.1.100:4030/");
 
 function Chat() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -163,7 +163,7 @@ function Chat() {
                     type="button"
                     variant="secondary"
                     onClick={scrollDown}
-                    className={`rounded-full fixed bottom-32 md:right-40 right-20 ring-2 ring-foreground z-50 ${
+                    className={`rounded-full fixed bottom-20 md:bottom-32 xl:right-40 md:right-20 right-4 ring-2 ring-foreground z-50 ${
                       window.innerHeight + window.scrollY >=
                       document.body.scrollHeight
                         ? "hidden"

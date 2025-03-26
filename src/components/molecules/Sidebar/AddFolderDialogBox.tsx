@@ -58,7 +58,7 @@ function AddFolderDialogBox() {
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="folderName" className="text-right">
+                <Label htmlFor="folderName" className="text-right text-nowrap">
                   Folder Name
                 </Label>
                 <Input
@@ -71,7 +71,7 @@ function AddFolderDialogBox() {
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="chats" className="text-right">
+                <Label htmlFor="chats" className="text-right text-nowrap">
                   Chats
                 </Label>
                 <FolderSelectBox />
