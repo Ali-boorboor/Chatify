@@ -169,6 +169,8 @@ function Chat() {
                   description={item?.sender?.description}
                   message={item.type === "message" ? item.message : undefined}
                   media={item.type === "media" ? item.media : undefined}
+                  imgSrc={item?.sender?.cover}
+                  createdAt={item?.createdAt}
                 />
               ))}
             </main>

@@ -34,6 +34,7 @@ export type ChatBubbleProps = {
   username: string;
   identifier: string;
   description?: string;
+  createdAt: Date;
 };
 
 export type ChatInputFormValues = {

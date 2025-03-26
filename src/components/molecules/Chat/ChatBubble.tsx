@@ -23,7 +23,10 @@ function ChatBubble({
   username,
   identifier,
   description,
+  createdAt,
 }: ChatBubbleProps) {
+  const messageDate = new Date(createdAt);
+
   return (
     <>
       <div
@@ -82,6 +85,21 @@ function ChatBubble({
                   isThisUserMessage ? "-right-1" : "-left-1"
                 }`}
               ></span>
+              <p
+                className={`text-right mt-1 ${
+                  isThisUserMessage ? "text-gray-200" : "text-gray-400"
+                } text-xs font-bold`}
+              >
+                {`${
+                  messageDate.getHours() <= 9
+                    ? `0${messageDate.getHours()}`
+                    : messageDate.getHours()
+                } : ${
+                  messageDate.getMinutes() <= 9
+                    ? `0${messageDate.getMinutes()}`
+                    : messageDate.getMinutes()
+                }`}
+              </p>
             </div>
           </ContextMenuTrigger>
           {isThisUserMessage && (

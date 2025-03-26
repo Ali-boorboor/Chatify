@@ -65,7 +65,7 @@ function ChatInput({ socket }: { socket: Socket }) {
                   <IoIosSend />
                 </Button>
               </ToolTip>
-              <ToolTip tooltipText="Upload Media">
+              <ToolTip tooltipText="Upload Image">
                 <Label htmlFor="file" className="cursor-pointer">
                   <div className="h-9 px-4 py-2 has-[>svg]:px-3 bg-chart-2 text-foreground rounded-md flex items-center gap-1">
                     <ImFilePicture />
@@ -87,12 +87,7 @@ function ChatInput({ socket }: { socket: Socket }) {
                 </Label>
               </ToolTip>
               <ToolTip tooltipText="Move Down">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  onClick={scrollDown}
-                  className="fixed right-20 xl:right-40 bottom-24 xl:bottom-44 ring-2 ring-foreground z-50"
-                >
+                <Button type="button" variant="outline" onClick={scrollDown}>
                   <FaSortDown />
                 </Button>
               </ToolTip>
