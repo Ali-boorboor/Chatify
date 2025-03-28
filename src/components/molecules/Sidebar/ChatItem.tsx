@@ -1,6 +1,6 @@
 import useStates from "@/hooks/useStates";
 import MainAvatar from "@/components/atoms/MainAvatar";
-import UserDataDrawer from "@/components/organisms/Chat/UserDataDrawer";
+import UserDataDrawer from "@/components/organisms/UserDataDrawer";
 import NotificationBadge from "@/components/atoms/NotificationBadge";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { ChatItemProps } from "@/types/molecules/types";
@@ -13,10 +13,10 @@ function ChatItem({
   fallBackText,
   identifier,
   description,
+  lastMessage,
 }: ChatItemProps) {
   const { selectedChatID, setSelectedChatID } = useStates();
   const notifCounts = null;
-  const lastChatText = "test text";
 
   return (
     <div
@@ -44,9 +44,9 @@ function ChatItem({
         <p className="font-semibold capitalize w-44 md:w-48 overflow-hidden text-ellipsis whitespace-nowrap drop-shadow-lg">
           {chatTitle}
         </p>
-        {lastChatText && (
+        {lastMessage && (
           <p className="font-normal w-44 md:w-48 overflow-hidden text-ellipsis whitespace-nowrap drop-shadow-lg">
-            {lastChatText}
+            {lastMessage}
           </p>
         )}
       </div>

@@ -27,7 +27,8 @@ const FolderSelectBox = () => {
     errorToastMsg: "Failed To Get Chats",
   });
 
-  const { selectedFolderChatValues, toggleFolderChatSelection } = useStates();
+  const { selectedFolderChatValues, userDatas, toggleFolderChatSelection } =
+    useStates();
   const [open, setOpen] = useState(false);
 
   return (
@@ -55,30 +56,58 @@ const FolderSelectBox = () => {
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup>
-              {data?.data?.data?.map((chat: { _id: string; title: string }) => (
-                <CommandItem
-                  key={chat?._id}
-                  onSelect={() =>
-                    toggleFolderChatSelection({
-                      id: chat?._id,
-                      title: chat?.title,
-                    })
-                  }
-                  className="flex items-center justify-between"
-                >
-                  {chat?.title}
-                  <Check
-                    className={cn(
-                      "h-4 w-4",
-                      selectedFolderChatValues?.some(
-                        (selected) => selected?.id === chat?._id
-                      )
-                        ? "opacity-100"
-                        : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
+              {data?.data?.data?.map(
+                (chat: {
+                  _id: string;
+                  title: string;
+                  isPV?: boolean;
+                  identifier: string;
+                  pvAccessUsers?: {
+                    _id: string;
+                    username: string;
+                    cover: string;
+                    identifier: string;
+                    description?: string;
+                  }[];
+                }) => {
+                  return (
+                    <CommandItem
+                      key={chat?._id}
+                      onSelect={() =>
+                        toggleFolderChatSelection({
+                          id: chat?._id,
+                          title: chat?.isPV
+                            ? chat?.identifier !== userDatas?.identifier
+                              ? chat?.pvAccessUsers! &&
+                                chat?.pvAccessUsers[1]?.username
+                              : chat?.pvAccessUsers! &&
+                                chat?.pvAccessUsers[0]?.username
+                            : chat?.title,
+                        })
+                      }
+                      className="flex items-center justify-between"
+                    >
+                      {chat?.isPV
+                        ? chat?.identifier !== userDatas?.identifier
+                          ? chat?.pvAccessUsers &&
+                            chat?.pvAccessUsers[1]?.username
+                          : chat?.pvAccessUsers &&
+                            chat?.pvAccessUsers[0]?.username
+                        : chat?.title}
+                      <Check
+                        className={cn(
+                          "h-4 w-4",
+                          selectedFolderChatValues?.some(
+                            (selected) => selected?.id === chat?._id
+                          )
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
+                      />
+                    </CommandItem>
+                  );
+                }
+              )}
             </CommandGroup>
           </CommandList>
         </Command>

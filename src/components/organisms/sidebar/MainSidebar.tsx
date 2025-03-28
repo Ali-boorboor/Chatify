@@ -1,10 +1,12 @@
 import useStates from "@/hooks/useStates";
 import Divider from "@/components/atoms/Divider";
 import MainAvatar from "@/components/atoms/MainAvatar";
+import Settings from "@/components/organisms/sidebar/settings/settings";
 import ChatItemsList from "@/components/molecules/Sidebar/ChatItemsList";
 import FolderItemsList from "@/components/molecules/Sidebar/FolderItemsList";
 import ChatItemSkeletons from "@/components/molecules/Sidebar/ChatItemSkeletons";
 import { useGetFolderChats, usePostReq } from "@/hooks/useRequests";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { IoMdSettings } from "react-icons/io";
@@ -18,7 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 import { memo } from "react";
 
-function AppSidebar() {
+function MainSidebar() {
   const { token, selectedFolder, userDatas } = useStates();
   const { data, isLoading } = useGetFolderChats(selectedFolder);
   const { mutate: logoutRequest } = usePostReq({
@@ -60,10 +62,15 @@ function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <Divider />
-        <Button>
-          <IoMdSettings className="w-5 h-5" />
-          <p className="capitalize font-semibold">settings</p>
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button type="button">
+              <IoMdSettings className="w-5 h-5" />
+              <p className="capitalize font-semibold">settings</p>
+            </Button>
+          </SheetTrigger>
+          <Settings />
+        </Sheet>
         <Button
           variant="destructive"
           type="button"
@@ -82,4 +89,4 @@ function AppSidebar() {
   );
 }
 
-export default memo(AppSidebar);
+export default memo(MainSidebar);

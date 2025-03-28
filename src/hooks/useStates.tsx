@@ -23,6 +23,7 @@ const useStates = create<StoreState>()(
         userID: "",
         username: "",
         identifier: "",
+        background: "",
       },
       setUserID: (userID) => {
         return set((state) => ({
@@ -32,6 +33,11 @@ const useStates = create<StoreState>()(
       setCover: (cover) => {
         return set((state) => ({
           userDatas: { ...state.userDatas, cover },
+        }));
+      },
+      setBackground: (background) => {
+        return set((state) => ({
+          userDatas: { ...state.userDatas, background },
         }));
       },
       setUsername: (username) => {
@@ -96,6 +102,14 @@ const useStates = create<StoreState>()(
             : [...state.selectedFolderChatValues, chat],
         }));
       },
+
+      // * user typing data state (infos of the user whose typing message)
+      userTypingData: { isTyping: false, username: "" },
+      setUserTypingData: (userTypingData) => set({ userTypingData }),
+
+      // * online users count in chat state
+      onlineUsersCount: 0,
+      setOnlineUsersCount: (onlineUsersCount) => set({ onlineUsersCount }),
     }),
 
     // ^ localStorage states configs

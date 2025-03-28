@@ -31,5 +31,13 @@ export type ChatInfos = {
   description?: string;
   identifier: string;
   messages: ChatMessages[];
+  pvAccessUsers?: {
+    _id: string;
+    username: string;
+    cover: string;
+    identifier: string;
+    description?: string;
+  }[];
   medias: ChatMedias[];
+  isPV?: boolean;
 };

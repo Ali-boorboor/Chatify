@@ -5,6 +5,7 @@ export type ChatItemProps = {
   fallBackText: string;
   identifier: string;
   description?: string;
+  lastMessage?: string;
 };
 
 export type ChatItemsListProps = {
@@ -15,6 +16,19 @@ export type ChatItemsListProps = {
       title: string;
       identifier: string;
       description?: string;
+      isPV?: boolean;
+      messages?: [
+        {
+          message: string;
+        }
+      ];
+      pvAccessUsers?: {
+        _id: string;
+        username: string;
+        cover: string;
+        identifier: string;
+        description?: string;
+      }[];
     }
   ];
 };

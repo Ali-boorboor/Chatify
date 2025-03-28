@@ -9,7 +9,7 @@ export type useGetReqProps = {
   refetchOnWindowFocus?: boolean;
 };
 
-export type usePostReqProps = {
+export type usePostPutReqProps = {
   url: string;
   navigateTo?: string;
   errorToastMsg?: string;
