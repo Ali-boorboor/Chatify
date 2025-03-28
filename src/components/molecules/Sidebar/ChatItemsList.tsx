@@ -32,8 +32,9 @@ function ChatItemsList({ chats }: ChatItemsListProps) {
             identifier={chat?.pvAccessUsers[0]?.identifier}
             description={chat?.pvAccessUsers[0]?.description}
             lastMessage={
-              chat?.messages?.length &&
-              chat?.messages[chat?.messages?.length - 1]?.message
+              chat?.messages?.length! >= 1
+                ? chat?.messages![chat?.messages?.length! - 1]?.message
+                : undefined
             }
           />
           <Divider />
@@ -50,8 +51,9 @@ function ChatItemsList({ chats }: ChatItemsListProps) {
             identifier={chat?.identifier}
             description={chat?.description}
             lastMessage={
-              chat?.messages?.length &&
-              chat?.messages[chat?.messages?.length - 1]?.message
+              chat?.messages?.length! >= 1
+                ? chat?.messages![chat?.messages?.length! - 1]?.message
+                : undefined
             }
           />
           <Divider />
