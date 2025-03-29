@@ -1,4 +1,5 @@
 import useStates from "@/hooks/useStates";
+import changePassValidations from "@/validators/changePass.validations";
 import { TabsContent } from "@/components/ui/tabs";
 import { usePutReq } from "@/hooks/useRequests";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,8 @@ function ChangePassword() {
 
   return (
     <Formik
+      validateOnBlur
+      validationSchema={changePassValidations}
       initialValues={{
         currentPassword: "",
         newPassword: "",
@@ -37,7 +40,7 @@ function ChangePassword() {
         resetForm();
       }}
     >
-      {({ values, handleChange }) => (
+      {({ values, handleChange, handleBlur }) => (
         <Form>
           <TabsContent value="changePassword">
             <div className="flex flex-col items-center gap-4">
@@ -48,6 +51,7 @@ function ChangePassword() {
                 onChange={handleChange}
                 value={values.currentPassword}
                 placeholder="Current Password"
+                onBlur={handleBlur}
               />
               <Input
                 type="password"
@@ -55,6 +59,7 @@ function ChangePassword() {
                 placeholder="New Password"
                 value={values.newPassword}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <Input
                 type="password"
@@ -62,6 +67,7 @@ function ChangePassword() {
                 placeholder="Submit New Password"
                 value={values.submitNewPassword}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <Button variant="green" type="submit" className="w-full">
                 Submit

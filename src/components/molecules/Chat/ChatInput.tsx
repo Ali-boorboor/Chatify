@@ -10,6 +10,7 @@ import { FaSortDown } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import { Socket } from "socket.io-client";
 import { memo, useEffect } from "react";
+import { toast } from "sonner";
 
 function ChatInput({ socket }: { socket: Socket }) {
   const { userDatas, selectedChatID } = useStates();
@@ -20,12 +21,15 @@ function ChatInput({ socket }: { socket: Socket }) {
     values: ChatInputFormValues,
     { resetForm }: FormikHelpers<ChatInputFormValues>
   ) => {
-    socket.emit("sendNewMessage", {
-      senderID: userDatas?.userID,
-      message: values.message,
-      chatID: selectedChatID,
-    });
-
+    if (values.message.trim().length >= 1) {
+      socket.emit("sendNewMessage", {
+        senderID: userDatas?.userID,
+        message: values.message,
+        chatID: selectedChatID,
+      });
+    } else {
+      toast.warning("Please Type Something Then Send It");
+    }
     resetForm();
   };
 

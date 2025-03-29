@@ -1,4 +1,5 @@
 import useStates from "@/hooks/useStates";
+import loginValidations from "@/validators/login.validations";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { usePostReq } from "@/hooks/useRequests";
@@ -39,6 +40,8 @@ function Login() {
 
   return (
     <Formik
+      validateOnBlur
+      validationSchema={loginValidations}
       initialValues={{ identifier: "", password: "" }}
       onSubmit={(values, { resetForm }) => {
         PostReq({
@@ -48,7 +51,7 @@ function Login() {
         resetForm();
       }}
     >
-      {({ values, handleChange }) => (
+      {({ values, handleChange, handleBlur }) => (
         <Form>
           <TabsContent value="login">
             <div className="flex flex-col items-center gap-8">
@@ -56,6 +59,7 @@ function Login() {
               <Input
                 type="text"
                 name="identifier"
+                onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.identifier}
                 placeholder="Username or Email"
@@ -63,6 +67,7 @@ function Login() {
               <Input
                 type="password"
                 name="password"
+                onBlur={handleBlur}
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}

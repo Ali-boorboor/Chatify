@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { memo, useEffect } from "react";
 import { Form, Formik } from "formik";
+import forgotPasswordValidations from "@/validators/forgotPassword.validations";
 
 function ForgotPassword() {
   const { setAuthSection } = useStates();
@@ -20,6 +21,8 @@ function ForgotPassword() {
 
   return (
     <Formik
+      validateOnBlur
+      validationSchema={forgotPasswordValidations}
       initialValues={{ identifier: "" }}
       onSubmit={(values, { resetForm }) => {
         PostReq({
@@ -29,7 +32,7 @@ function ForgotPassword() {
         resetForm();
       }}
     >
-      {({ values, handleChange }) => (
+      {({ values, handleChange, handleBlur }) => (
         <Form>
           <TabsContent value="forgotPassword">
             <div className="flex flex-col items-center gap-8">
@@ -37,6 +40,7 @@ function ForgotPassword() {
               <Input
                 type="text"
                 name="identifier"
+                onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.identifier}
                 placeholder="Username or Email"

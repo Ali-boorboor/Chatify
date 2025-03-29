@@ -1,4 +1,5 @@
 import useStates from "@/hooks/useStates";
+import changeUsernameValidations from "@/validators/changeUsername.validations";
 import { TabsContent } from "@/components/ui/tabs";
 import { usePutReq } from "@/hooks/useRequests";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,8 @@ function ChangeUsername() {
 
   return (
     <Formik
+      validateOnBlur
+      validationSchema={changeUsernameValidations}
       initialValues={{
         newUsername: "",
         password: "",
@@ -44,7 +47,7 @@ function ChangeUsername() {
         resetForm();
       }}
     >
-      {({ values, handleChange }) => (
+      {({ values, handleChange, handleBlur }) => (
         <Form>
           <TabsContent value="changeUsername">
             <div className="flex flex-col items-center gap-4">
@@ -55,6 +58,7 @@ function ChangeUsername() {
                 onChange={handleChange}
                 value={values.newUsername}
                 placeholder="New Username"
+                onBlur={handleBlur}
               />
               <Input
                 type="password"
@@ -62,6 +66,7 @@ function ChangeUsername() {
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <Button variant="green" type="submit" className="w-full">
                 Submit

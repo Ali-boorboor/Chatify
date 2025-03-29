@@ -1,5 +1,6 @@
 import useStates from "@/hooks/useStates";
 import FolderSelectBox from "@/components/atoms/FolderSelectBox";
+import addFolderValidations from "@/validators/addFolder.validations";
 import { usePostReq } from "@/hooks/useRequests";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Form, Formik } from "formik";
+import { toast } from "sonner";
 import { memo } from "react";
 
 function AddFolderDialogBox() {
@@ -31,24 +33,30 @@ function AddFolderDialogBox() {
   return (
     <DialogContent className="max-w-md w-full">
       <Formik
+        validateOnBlur
+        validationSchema={addFolderValidations}
         initialValues={{ folderName: "" }}
         onSubmit={(values, { resetForm }) => {
-          PostReq({
-            body: {
-              title: values.folderName,
-              chats: selectedFolderChatValues?.map((item) => item.id),
-            },
-            config: {
-              headers: { Authorization: token },
-            },
-          });
+          if (selectedFolderChatValues.length >= 1) {
+            PostReq({
+              body: {
+                title: values.folderName,
+                chats: selectedFolderChatValues?.map((item) => item.id),
+              },
+              config: {
+                headers: { Authorization: token },
+              },
+            });
 
-          setIsAddFolderModalOpen(false);
-          setSelectedFolderChatValues([]);
-          resetForm({});
+            setIsAddFolderModalOpen(false);
+            setSelectedFolderChatValues([]);
+            resetForm({});
+          } else {
+            toast.warning("You Must At Least Select One Chat To Add A Folder");
+          }
         }}
       >
-        {({ values, handleChange }) => (
+        {({ values, handleChange, handleBlur }) => (
           <Form>
             <DialogHeader>
               <DialogTitle>Add Folder</DialogTitle>
@@ -57,7 +65,7 @@ function AddFolderDialogBox() {
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
+              <div className="flex flex-col justify-center items-start gap-4">
                 <Label htmlFor="folderName" className="text-right text-nowrap">
                   Folder Name
                 </Label>
@@ -68,9 +76,10 @@ function AddFolderDialogBox() {
                   placeholder="Folder Name"
                   value={values.folderName}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
+              <div className="flex flex-col justify-center items-start gap-4">
                 <Label htmlFor="chats" className="text-right text-nowrap">
                   Chats
                 </Label>

@@ -1,4 +1,5 @@
 import useStates from "@/hooks/useStates";
+import signupValidations from "@/validators/signup.validations";
 import { Form, Formik } from "formik";
 import { TiTick } from "react-icons/ti";
 import { Input } from "@/components/ui/input";
@@ -27,6 +28,8 @@ function Signup() {
 
   return (
     <Formik
+      validateOnBlur
+      validationSchema={signupValidations}
       initialValues={{
         file: "",
         email: "",
@@ -47,7 +50,7 @@ function Signup() {
         resetForm();
       }}
     >
-      {({ values, handleChange, setFieldValue }) => (
+      {({ values, handleChange, setFieldValue, handleBlur }) => (
         <Form>
           <TabsContent value="signup">
             <div className="flex flex-col items-center gap-8">
@@ -59,6 +62,7 @@ function Signup() {
                   placeholder="Username"
                   value={values.username}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <Label htmlFor="file" className="cursor-pointer">
                   <p className="bg-chart-2 text-foreground pl-1 pr-3 py-1 rounded-md flex items-center gap-1">
@@ -95,6 +99,7 @@ function Signup() {
                 placeholder="Email"
                 value={values.email}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <Input
                 type="password"
@@ -102,6 +107,7 @@ function Signup() {
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <Input
                 type="password"
@@ -109,6 +115,7 @@ function Signup() {
                 placeholder="Submit Password"
                 value={values.submitPassword}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <Button variant="green" type="submit" className="w-full">
                 Signup

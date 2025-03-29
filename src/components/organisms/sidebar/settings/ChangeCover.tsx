@@ -1,4 +1,5 @@
 import useStates from "@/hooks/useStates";
+import changeCoverValidations from "@/validators/changeCover.validations";
 import { TabsContent } from "@/components/ui/tabs";
 import { usePutReq } from "@/hooks/useRequests";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,8 @@ function ChangeCover() {
 
   return (
     <Formik
+      validateOnBlur
+      validationSchema={changeCoverValidations}
       initialValues={{
         password: "",
         cover: "",
@@ -50,7 +53,7 @@ function ChangeCover() {
         resetForm();
       }}
     >
-      {({ values, handleChange, setFieldValue }) => (
+      {({ values, handleChange, handleBlur, setFieldValue }) => (
         <Form>
           <TabsContent value="changeCover">
             <div className="flex flex-col items-center gap-4">
@@ -89,6 +92,7 @@ function ChangeCover() {
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <Button variant="green" type="submit" className="w-full">
                 Submit

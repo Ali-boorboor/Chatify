@@ -118,7 +118,7 @@ function Chat() {
       <div className="flex flex-col h-full justify-between relative">
         <HeaderSection />
         <MainSection socket={socket} combinedItems={combinedItems} />
-        <FooterSection socket={socket} />
+        {selectedChatID && <FooterSection socket={socket} />}
       </div>
     </Layout>
   );

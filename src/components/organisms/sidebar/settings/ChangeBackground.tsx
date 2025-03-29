@@ -1,4 +1,5 @@
 import useStates from "@/hooks/useStates";
+import changeBackgroundValidations from "@/validators/changeBackground.validations";
 import { TabsContent } from "@/components/ui/tabs";
 import { usePutReq } from "@/hooks/useRequests";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,8 @@ function ChangeBackground() {
 
   return (
     <Formik
+      validateOnBlur
+      validationSchema={changeBackgroundValidations}
       initialValues={{
         password: "",
         background: "",
@@ -50,7 +53,7 @@ function ChangeBackground() {
         resetForm();
       }}
     >
-      {({ values, handleChange, setFieldValue }) => (
+      {({ values, handleChange, handleBlur, setFieldValue }) => (
         <Form>
           <TabsContent value="changeBackground">
             <div className="flex flex-col items-center gap-4">
@@ -89,6 +92,7 @@ function ChangeBackground() {
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <Button variant="green" type="submit" className="w-full">
                 Submit
