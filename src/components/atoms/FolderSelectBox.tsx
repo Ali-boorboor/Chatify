@@ -70,29 +70,24 @@ const FolderSelectBox = () => {
                     description?: string;
                   }[];
                 }) => {
+                  console.log(chat);
                   return (
                     <CommandItem
                       key={chat?._id}
                       onSelect={() =>
                         toggleFolderChatSelection({
                           id: chat?._id,
-                          title: chat?.isPV
-                            ? chat?.identifier !== userDatas?.identifier
-                              ? chat?.pvAccessUsers! &&
-                                chat?.pvAccessUsers[1]?.username
-                              : chat?.pvAccessUsers! &&
-                                chat?.pvAccessUsers[0]?.username
-                            : chat?.title,
+                          title:
+                            chat?.isPV &&
+                            chat?.identifier === userDatas?.identifier
+                              ? chat?.pvAccessUsers![1]?.username
+                              : chat?.title,
                         })
                       }
                       className="flex items-center justify-between"
                     >
-                      {chat?.isPV
-                        ? chat?.identifier !== userDatas?.identifier
-                          ? chat?.pvAccessUsers &&
-                            chat?.pvAccessUsers[1]?.username
-                          : chat?.pvAccessUsers &&
-                            chat?.pvAccessUsers[0]?.username
+                      {chat?.isPV && chat?.identifier === userDatas?.identifier
+                        ? chat?.pvAccessUsers![1]?.username
                         : chat?.title}
                       <Check
                         className={cn(

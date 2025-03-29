@@ -1,4 +1,4 @@
-import Auth from "@/components/templates/Auth";
+import Auth from "@/components/organisms/Auth";
 import { memo } from "react";
 
 function AuthPage() {

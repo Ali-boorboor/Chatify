@@ -33,9 +33,9 @@ function HeaderSection() {
                   selectedChatInfo?.isPV &&
                   selectedChatInfo?.pvAccessUsers && (
                     <MainAvatar
-                      imgSrc={selectedChatInfo?.pvAccessUsers[0]?.cover}
+                      imgSrc={selectedChatInfo?.pvAccessUsers[1]?.cover}
                       fallBackText={
-                        selectedChatInfo?.pvAccessUsers[0]?.username?.slice(
+                        selectedChatInfo?.pvAccessUsers[1]?.username?.slice(
                           0,
                           2
                         )!
@@ -52,7 +52,7 @@ function HeaderSection() {
                     selectedChatInfo?.identifier !== userDatas?.identifier
                     ? selectedChatInfo?.title
                     : selectedChatInfo?.pvAccessUsers &&
-                      selectedChatInfo?.pvAccessUsers[0]?.username
+                      selectedChatInfo?.pvAccessUsers[1]?.username
                   : "select a chat to view"}
               </p>
               <p className="font-semibold text-sm text-gray-400 italic lowercase">
@@ -85,10 +85,10 @@ function HeaderSection() {
               selectedChatInfo?.isPV &&
               selectedChatInfo?.pvAccessUsers && (
                 <UserDataDrawer
-                  title={selectedChatInfo?.pvAccessUsers[0]?.username}
-                  cover={selectedChatInfo?.pvAccessUsers[0]?.cover}
-                  identifier={selectedChatInfo?.pvAccessUsers[0]?.identifier}
-                  description={selectedChatInfo?.pvAccessUsers[0]?.description}
+                  title={selectedChatInfo?.pvAccessUsers[1]?.username}
+                  cover={selectedChatInfo?.pvAccessUsers[1]?.cover}
+                  identifier={selectedChatInfo?.pvAccessUsers[1]?.identifier}
+                  description={selectedChatInfo?.pvAccessUsers[1]?.description}
                 />
               )
             ))}

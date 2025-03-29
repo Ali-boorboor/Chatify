@@ -65,12 +65,22 @@ const useStates = create<StoreState>()(
       addMessage: (newMessage) => {
         return set((state) => ({ messages: [...state.messages, newMessage] }));
       },
+      removeMessage: (messageID) => {
+        set((state) => ({
+          messages: state.messages.filter((msg) => msg._id !== messageID),
+        }));
+      },
 
       // * type new message input state
       medias: [],
       setMedias: (medias) => set({ medias }),
       addMedia: (newMedia) => {
         return set((state) => ({ medias: [...state.medias, newMedia] }));
+      },
+      removeMedia: (mediaID) => {
+        set((state) => ({
+          medias: state.medias.filter((media) => media._id !== mediaID),
+        }));
       },
 
       // * chat Info state that user is in it

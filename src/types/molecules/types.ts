@@ -49,6 +49,7 @@ export type ChatBubbleProps = {
   identifier: string;
   description?: string;
   createdAt: Date;
+  deleteMessageHandler?: () => void;
 };
 
 export type ChatInputFormValues = {

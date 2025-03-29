@@ -4,7 +4,6 @@ import UserDatasHoverCard from "@/components/atoms/UserDatasHoverCard";
 import { HoverCard, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { ChatBubbleProps } from "@/types/molecules/types";
-import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import {
   ContextMenu,
@@ -24,6 +23,7 @@ function ChatBubble({
   identifier,
   description,
   createdAt,
+  deleteMessageHandler,
 }: ChatBubbleProps) {
   const messageDate = new Date(createdAt);
 
@@ -111,13 +111,10 @@ function ChatBubble({
           )}
           {isThisUserMessage && (
             <ContextMenuContent>
-              {message && (
-                <ContextMenuItem>
-                  <MdModeEdit />
-                  <p>Edit</p>
-                </ContextMenuItem>
-              )}
-              <ContextMenuItem variant="destructive">
+              <ContextMenuItem
+                variant="destructive"
+                onClick={deleteMessageHandler}
+              >
                 <MdDelete />
                 <p>Delete</p>
               </ContextMenuItem>

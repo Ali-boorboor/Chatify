@@ -26,11 +26,11 @@ function ChatItemsList({ chats }: ChatItemsListProps) {
         <div key={chat?._id}>
           <ChatItem
             chatID={chat?._id}
-            imgSrc={chat?.pvAccessUsers[0]?.cover}
-            chatTitle={chat?.pvAccessUsers[0]?.username}
-            fallBackText={chat?.pvAccessUsers[0]?.username?.slice(0, 2)}
-            identifier={chat?.pvAccessUsers[0]?.identifier}
-            description={chat?.pvAccessUsers[0]?.description}
+            imgSrc={chat?.pvAccessUsers[1]?.cover}
+            chatTitle={chat?.pvAccessUsers[1]?.username}
+            fallBackText={chat?.pvAccessUsers[1]?.username?.slice(0, 2)}
+            identifier={chat?.pvAccessUsers[1]?.identifier}
+            description={chat?.pvAccessUsers[1]?.description}
             lastMessage={
               chat?.messages?.length! >= 1
                 ? chat?.messages![chat?.messages?.length! - 1]?.message

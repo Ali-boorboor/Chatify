@@ -18,8 +18,10 @@ function Chat() {
     onlineUsersCount,
     setMessages,
     addMessage,
+    removeMessage,
     setMedias,
     addMedia,
+    removeMedia,
     setSelectedChatInfo,
     setUserTypingData,
     setOnlineUsersCount,
@@ -38,18 +40,7 @@ function Chat() {
         setMessages(ChatInfos?.messages);
         setMedias(ChatInfos?.medias);
       });
-    }
 
-    return () => {
-      socket.off("joinChat");
-      socket.off("chatInfo");
-      socket.emit("leaveChat", selectedChatID);
-      socket.off("leaveChat");
-    };
-  }, [selectedChatID]);
-
-  useEffect(() => {
-    if (selectedChatID) {
       socket.on(
         "isTyping",
         ({ isTyping, username }: { isTyping: boolean; username: string }) => {
@@ -60,30 +51,43 @@ function Chat() {
       socket.on("onlineUsers", (onlineUsers) => {
         setOnlineUsersCount(onlineUsers);
       });
-    }
 
-    return () => {
-      socket.off("isTyping");
-      socket.off("onlineUsers");
-    };
-  }, [selectedChatID, userTypingData, onlineUsersCount]);
-
-  useEffect(() => {
-    if (selectedChatID) {
       socket.on("newMessage", (newMessage) => {
         addMessage(newMessage);
+      });
+
+      socket.on("messageDeleted", (deleteMessage) => {
+        removeMessage(deleteMessage?.messageID);
       });
 
       socket.on("newMedia", (newMedia) => {
         addMedia(newMedia);
       });
+
+      socket.on("mediaDeleted", (deleteMedia) => {
+        removeMedia(deleteMedia?.mediaID);
+      });
     }
 
     return () => {
+      socket.off("joinChat");
+      socket.off("chatInfo");
+      socket.emit("leaveChat", selectedChatID);
+      socket.off("leaveChat");
+      socket.off("isTyping");
+      socket.off("onlineUsers");
       socket.off("newMessage");
       socket.off("newMedia");
     };
-  }, [selectedChatID, addMessage, addMedia]);
+  }, [
+    selectedChatID,
+    userTypingData,
+    onlineUsersCount,
+    addMedia,
+    addMessage,
+    removeMedia,
+    removeMessage,
+  ]);
 
   const combinedItems = useMemo(() => {
     const safeMessages = messages || [];
@@ -113,7 +117,7 @@ function Chat() {
     <Layout>
       <div className="flex flex-col h-full justify-between relative">
         <HeaderSection />
-        <MainSection combinedItems={combinedItems} />
+        <MainSection socket={socket} combinedItems={combinedItems} />
         <FooterSection socket={socket} />
       </div>
     </Layout>
