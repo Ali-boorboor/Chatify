@@ -16,3 +16,10 @@ export type usePostPutReqProps = {
   refetchQueryKey?: string | string[];
   successToastMsg?: string;
 };
+
+export type useDeleteProps = {
+  navigateTo?: string;
+  errorToastMsg?: string;
+  refetchQueryKey?: string | string[];
+  successToastMsg?: string;
+};

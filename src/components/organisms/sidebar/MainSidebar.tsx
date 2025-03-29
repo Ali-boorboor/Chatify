@@ -8,7 +8,6 @@ import ChatItemSkeletons from "@/components/molecules/Sidebar/ChatItemSkeletons"
 import { useGetFolderChats, usePostReq } from "@/hooks/useRequests";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { IoMdSettings } from "react-icons/io";
 import { IoLogOut } from "react-icons/io5";
 import {
@@ -41,7 +40,6 @@ function MainSidebar() {
         <h1 className="text-center capitalize text-md md:text-xl font-bold">
           {userDatas?.username}
         </h1>
-        <Input type="text" placeholder="Search" />
       </SidebarHeader>
       <SidebarContent className="scrollbar-hidden">
         <FolderItemsList />

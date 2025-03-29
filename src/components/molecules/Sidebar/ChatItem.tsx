@@ -44,10 +44,12 @@ function ChatItem({
         <p className="font-semibold capitalize w-44 md:w-48 overflow-hidden text-ellipsis whitespace-nowrap drop-shadow-lg">
           {chatTitle}
         </p>
-        {lastMessage && (
+        {lastMessage ? (
           <p className="font-normal w-44 md:w-48 overflow-hidden text-ellipsis whitespace-nowrap drop-shadow-lg">
             {lastMessage}
           </p>
+        ) : (
+          description || null
         )}
       </div>
       {notifCounts && (

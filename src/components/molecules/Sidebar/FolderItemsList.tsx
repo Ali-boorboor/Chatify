@@ -7,9 +7,16 @@ import { folderItemsType } from "@/types/organisms/types";
 import { SidebarGroupContent } from "@/components/ui/sidebar";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useGetReq } from "@/hooks/useRequests";
+import { useDeleteReq, useGetReq } from "@/hooks/useRequests";
 import { IoAddOutline } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
 import { memo } from "react";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 
 function FolderItemsList() {
   const {
@@ -26,6 +33,15 @@ function FolderItemsList() {
     staleTime: 86400000,
     errorToastMsg: "Failed To Get Folders",
   });
+  const { mutate: deleteReq } = useDeleteReq({
+    refetchQueryKey: "FOLDERS",
+    successToastMsg: "Folder Deleted Successfully",
+    errorToastMsg: "Failed To Delete Folder",
+  });
+
+  const deleteFolderHandler = (folderID: string) => {
+    deleteReq({ url: `/folder/${folderID}` });
+  };
 
   return (
     <SidebarGroupContent>
@@ -45,17 +61,30 @@ function FolderItemsList() {
           <FolderSkeletons />
         ) : (
           folders?.data?.data?.map((folder: folderItemsType) => (
-            <Button
-              key={folder?._id}
-              className={`${
-                selectedFolder === folder?._id
-                  ? "bg-chart-2 hover:bg-chart-2"
-                  : "bg-gray-400 hover:bg-gray-400"
-              } transition-all duration-300 ease-linear`}
-              onClick={() => setSelectedFolder(folder?._id)}
-            >
-              {folder?.title}
-            </Button>
+            <ContextMenu>
+              <ContextMenuTrigger>
+                <Button
+                  key={folder?._id}
+                  className={`${
+                    selectedFolder === folder?._id
+                      ? "bg-chart-2 hover:bg-chart-2"
+                      : "bg-gray-400 hover:bg-gray-400"
+                  } transition-all duration-300 ease-linear`}
+                  onClick={() => setSelectedFolder(folder?._id)}
+                >
+                  {folder?.title}
+                </Button>
+              </ContextMenuTrigger>
+              <ContextMenuContent>
+                <ContextMenuItem
+                  variant="destructive"
+                  onClick={() => deleteFolderHandler(folder?._id)}
+                >
+                  <MdDelete />
+                  <p>Delete</p>
+                </ContextMenuItem>
+              </ContextMenuContent>
+            </ContextMenu>
           ))
         )}
         <ToolTip tooltipText="Add Folder">

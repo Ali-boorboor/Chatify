@@ -1,6 +1,10 @@
 import useStates from "@/hooks/useStates";
 import AxiosInstance from "@/utils/AxiosInstance";
-import { useGetReqProps, usePostPutReqProps } from "@/types/requestHooks/types";
+import {
+  useDeleteProps,
+  useGetReqProps,
+  usePostPutReqProps,
+} from "@/types/requestHooks/types";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { AxiosRequestConfig } from "axios";
@@ -134,4 +138,38 @@ function usePutReq({
   return { data, isSuccess, isError, isLoading, mutate };
 }
 
-export { useGetReq, useGetFolderChats, usePostReq, usePutReq };
+// ^ useDeleteReq hook for all delete requests
+function useDeleteReq({
+  navigateTo,
+  errorToastMsg,
+  refetchQueryKey,
+  successToastMsg,
+}: useDeleteProps) {
+  const { setHasLoading, token } = useStates();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const { data, isSuccess, isError, isLoading, mutate } = useMutation(
+    ({ url }: { url: string }) => {
+      return AxiosInstance.delete(url, { headers: { Authorization: token } });
+    },
+    {
+      onSuccess: () => {
+        navigateTo && navigate(navigateTo);
+        queryClient.invalidateQueries(refetchQueryKey);
+        successToastMsg && toast.success(successToastMsg);
+      },
+      onError: () => {
+        errorToastMsg && toast.error(errorToastMsg);
+      },
+    }
+  );
+
+  useEffect(() => {
+    setHasLoading(isLoading);
+  }, [isLoading]);
+
+  return { data, isSuccess, isError, isLoading, mutate };
+}
+
+export { useGetReq, useGetFolderChats, usePostReq, usePutReq, useDeleteReq };
