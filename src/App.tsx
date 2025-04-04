@@ -10,6 +10,8 @@ function App() {
   const { hasLoading } = useStates();
   const routes = useRoutes(Router);
 
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
+
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
       {routes}
