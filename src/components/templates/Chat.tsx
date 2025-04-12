@@ -7,7 +7,9 @@ import { ChatInfos } from "@/types/templates/types";
 import { memo, useEffect, useMemo } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:4030/", { transports: ["websocket"] });
+const socket = io("https://chatify-backend.liara.run/", {
+  transports: ["websocket"],
+});
 
 function Chat() {
   const {
