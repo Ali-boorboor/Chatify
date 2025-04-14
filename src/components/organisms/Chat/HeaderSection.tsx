@@ -64,10 +64,6 @@ function HeaderSection() {
                   `${onlineUsersCount} online ${
                     onlineUsersCount <= 1 ? "user" : "users"
                   }`
-                ) : onlineUsersCount === 2 ? (
-                  "online"
-                ) : onlineUsersCount === 1 ? (
-                  "last seen recently"
                 ) : null}
               </p>
             </div>

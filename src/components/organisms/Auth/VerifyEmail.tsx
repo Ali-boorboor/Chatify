@@ -40,7 +40,7 @@ function VerifyEmail() {
             <div className="flex flex-col items-center gap-8">
               <h1 className="text-2xl font-bold">Verify Email</h1>
               <p className="font-bold italic text-gray-400">
-                Enter The Code That Was Send To Your Email
+                Enter The Code That Was Send To Your Email (Migth be in spams)
               </p>
               <InputOTP
                 name="code"
