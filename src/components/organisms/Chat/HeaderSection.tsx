@@ -6,13 +6,8 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { memo } from "react";
 
 function HeaderSection() {
-  const {
-    selectedChatID,
-    userDatas,
-    selectedChatInfo,
-    userTypingData,
-    onlineUsersCount,
-  } = useStates();
+  const { selectedChatID, userDatas, selectedChatInfo, userTypingData } =
+    useStates();
 
   return (
     <header className="sticky top-0 z-50 drop-shadow-lg border-b border-foreground">
@@ -60,10 +55,6 @@ function HeaderSection() {
                   <span className="animate-pulse">
                     {userTypingData?.username} is typing...
                   </span>
-                ) : selectedChatID && !selectedChatInfo?.isPV ? (
-                  `${onlineUsersCount} online ${
-                    onlineUsersCount <= 1 ? "user" : "users"
-                  }`
                 ) : null}
               </p>
             </div>
